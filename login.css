@@ -1,17 +1,29 @@
+```css
+/* =========================================
+   PRIVATESPACE — LOGIN PAGE DESIGN
+========================================= */
 
-/* =====================================
-   PRIVATESPACE - ACCOUNT ACCESS
-===================================== */
+/* 1. COLOR SETTINGS */
 
 :root {
     --background: #080b18;
-    --card: rgba(19, 24, 46, 0.82);
+    --card: rgba(19, 24, 46, 0.86);
+
     --text: #f5f5ff;
     --muted: #9ba3bd;
+
     --purple: #9b7cff;
+    --purple-light: #b9a5ff;
     --cyan: #55d6e8;
+
+    --success: #55d6a5;
+    --error: #ff929b;
+
     --border: rgba(255, 255, 255, 0.09);
 }
+
+
+/* 2. BASIC RESET */
 
 * {
     margin: 0;
@@ -23,79 +35,106 @@
     display: none !important;
 }
 
-body {
-    min-height: 100vh;
-    font-family: "DM Sans", sans-serif;
-    background: var(--background);
-    color: var(--text);
-    overflow-x: hidden;
-    position: relative;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Background lighting */
+body {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family: "DM Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* 3. BACKGROUND LIGHTING */
 
 .background-glow {
     position: fixed;
     width: 420px;
     height: 420px;
+
     border-radius: 50%;
     filter: blur(110px);
+
     opacity: 0.19;
     pointer-events: none;
     z-index: -1;
 }
 
 .glow-one {
-    background: #7548ff;
     top: -170px;
     left: -120px;
+    background: #7548ff;
 }
 
 .glow-two {
-    background: #008fa8;
     right: -150px;
     bottom: -170px;
+    background: #008fa8;
 }
 
-/* Main page */
+
+/* 4. MAIN CONTAINER */
 
 .page-container {
     width: min(1150px, 92%);
     min-height: 100vh;
-    margin: auto;
+
+    margin: 0 auto;
+
     display: flex;
     flex-direction: column;
 }
 
-/* Header */
+
+/* 5. HEADER */
 
 .top-header {
-    height: 95px;
+    min-height: 95px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px;
 }
 
 .brand {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 12px;
+
     color: var(--text);
     text-decoration: none;
+
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.7px;
 }
 
 .brand-icon {
-    width: 39px;
-    height: 39px;
+    width: 40px;
+    height: 40px;
+
     display: grid;
     place-items: center;
+
     border-radius: 12px;
-    background: linear-gradient(135deg, #a78bfa, #6554d9);
+
+    background: linear-gradient(
+        135deg,
+        #a78bfa,
+        #6554d9
+    );
+
     color: white;
     font-size: 21px;
+
     box-shadow: 0 5px 25px rgba(139, 92, 246, 0.3);
 }
 
@@ -107,7 +146,9 @@ body {
     display: flex;
     align-items: center;
     gap: 9px;
+
     color: #aeb6d0;
+
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.7px;
@@ -116,34 +157,49 @@ body {
 .status-dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
-    background: #55d6a5;
-    box-shadow: 0 0 12px #55d6a5;
+
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
 }
 
-/* Login section */
+
+/* 6. LOGIN SECTION */
 
 .login-section {
     flex: 1;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     padding: 35px 0 55px;
 }
+
+
+/* 7. LOGIN CARD */
 
 .login-card {
     width: 100%;
     max-width: 465px;
+
     position: relative;
     overflow: hidden;
+
     padding: 43px 42px 30px;
+
     border: 1px solid var(--border);
     border-radius: 25px;
+
     background: var(--card);
+
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
+
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+
     animation: cardAppear 0.7s ease both;
 }
 
@@ -161,48 +217,63 @@ body {
 
 .card-decoration {
     position: absolute;
+
     width: 180px;
     height: 180px;
+
     top: -125px;
     right: -75px;
+
     border-radius: 50%;
+
     background: #8964ff;
     filter: blur(85px);
+
     opacity: 0.3;
     pointer-events: none;
 }
 
-/* Welcome icon */
+
+/* 8. WELCOME ICON */
 
 .welcome-icon {
     width: 55px;
     height: 55px;
+
     display: grid;
     place-items: center;
-    border-radius: 17px;
+
     margin-bottom: 25px;
+
+    border: 1px solid rgba(155, 124, 255, 0.25);
+    border-radius: 17px;
+
     background: linear-gradient(
         135deg,
         rgba(155, 124, 255, 0.22),
         rgba(85, 214, 232, 0.10)
     );
-    border: 1px solid rgba(155, 124, 255, 0.25);
+
     color: #c1adff;
     font-size: 25px;
 }
 
 .eyebrow {
+    margin-bottom: 13px;
+
     color: var(--cyan);
+
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 2.3px;
-    margin-bottom: 13px;
 }
 
 h1 {
     font-family: "Playfair Display", serif;
+
     font-size: clamp(32px, 5vw, 39px);
     font-weight: 500;
+
     letter-spacing: -1px;
     line-height: 1.2;
 }
@@ -212,15 +283,19 @@ h1 span {
 }
 
 .subtitle {
+    max-width: 330px;
+
     margin-top: 13px;
     margin-bottom: 32px;
+
     color: var(--muted);
+
     font-size: 13px;
     line-height: 1.8;
-    max-width: 330px;
 }
 
-/* Forms */
+
+/* 9. LOGIN FORM */
 
 form {
     width: 100%;
@@ -232,8 +307,11 @@ form {
 
 .form-group label {
     display: block;
+
     margin-bottom: 9px;
+
     color: #e4e7f4;
+
     font-size: 12px;
     font-weight: 600;
 }
@@ -241,15 +319,23 @@ form {
 .form-group input {
     width: 100%;
     height: 51px;
+
     padding: 0 16px;
+
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 11px;
+
     outline: none;
+
     background: rgba(255, 255, 255, 0.045);
     color: white;
+
     font-family: inherit;
     font-size: 13px;
-    transition: 0.25s ease;
+
+    transition: border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
 }
 
 .form-group input::placeholder {
@@ -258,7 +344,9 @@ form {
 
 .form-group input:focus {
     border-color: var(--purple);
+
     background: rgba(155, 124, 255, 0.07);
+
     box-shadow: 0 0 0 3px rgba(155, 124, 255, 0.10);
 }
 
@@ -266,33 +354,51 @@ form {
     outline: none;
 }
 
-/* Main button */
+
+/* 10. LOGIN BUTTON */
 
 #loginButton,
 #signupButton {
     width: 100%;
-    height: 53px;
+    min-height: 53px;
+
     margin-top: 8px;
     padding: 0 18px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     border: none;
     border-radius: 12px;
-    background: linear-gradient(110deg, #9271f5, #7056d9);
+
+    background: linear-gradient(
+        110deg,
+        #9271f5,
+        #7056d9
+    );
+
     color: white;
+
     font-family: inherit;
     font-size: 13px;
     font-weight: 700;
+
     cursor: pointer;
+
     box-shadow: 0 8px 25px rgba(123, 91, 229, 0.22);
-    transition: 0.25s ease;
+
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
 }
 
 #loginButton:hover,
 #signupButton:hover {
     transform: translateY(-2px);
+
     box-shadow: 0 12px 30px rgba(123, 91, 229, 0.35);
+
     filter: brightness(1.08);
 }
 
@@ -313,42 +419,54 @@ form {
     font-weight: 400;
 }
 
-/* Messages */
+
+/* 11. LOGIN MESSAGES */
 
 .login-message {
     min-height: 18px;
+
     margin: 4px 0 10px;
+
+    color: var(--error);
+
     font-size: 12px;
     line-height: 1.6;
-    color: #ff9b9b;
 }
 
 .login-message.success {
     color: #67dfb1;
 }
 
-/* Signup note */
+
+/* 12. SIGNUP NOTE */
 
 .signup-note {
     margin-top: 17px;
     padding: 13px;
+
     border: 1px solid rgba(85, 214, 232, 0.15);
     border-radius: 10px;
+
     background: rgba(85, 214, 232, 0.055);
+
     color: #aab7c9;
+
     font-size: 11px;
     line-height: 1.7;
 }
 
-/* Switch between login and signup */
+
+/* 13. LOGIN / SIGNUP SWITCH */
 
 .auth-switch {
     margin-top: 27px;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 6px;
+
     color: var(--muted);
     font-size: 12px;
 }
@@ -356,27 +474,35 @@ form {
 .auth-switch button {
     border: none;
     background: transparent;
-    color: #b59cff;
+
+    color: var(--purple-light);
+
     font-family: inherit;
     font-size: 12px;
     font-weight: 700;
+
     cursor: pointer;
-    transition: 0.2s ease;
+
+    transition: color 0.2s ease;
 }
 
 .auth-switch button:hover {
     color: var(--cyan);
 }
 
-/* Footer inside card */
+
+/* 14. CARD FOOTER */
 
 .card-footer {
     margin-top: 29px;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
+
     color: #707a96;
+
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -385,32 +511,77 @@ form {
 .footer-line {
     width: 48px;
     height: 1px;
+
     background: rgba(255, 255, 255, 0.12);
 }
 
-/* Bottom text */
+
+/* 15. BOTTOM MESSAGE */
 
 .bottom-note {
     margin-top: 25px;
+
     color: #77809a;
+
     font-family: "Playfair Display", serif;
     font-size: 14px;
     font-style: italic;
+
+    text-align: center;
 }
 
-/* Page footer */
+
+/* 16. PAGE FOOTER */
 
 .page-footer {
     min-height: 65px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
+
     color: #6f7892;
     font-size: 10px;
 }
 
-/* Mobile responsive */
+
+/* 17. ACCESSIBILITY */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* 18. TABLET RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .page-container {
+        width: 92%;
+    }
+
+    .login-card {
+        max-width: 440px;
+    }
+
+}
+
+
+/* 19. MOBILE RESPONSIVE */
 
 @media (max-width: 600px) {
 
@@ -419,7 +590,7 @@ form {
     }
 
     .top-header {
-        height: 75px;
+        min-height: 75px;
     }
 
     .brand {
@@ -463,11 +634,17 @@ form {
     .page-footer {
         flex-direction: column;
         justify-content: center;
+
         gap: 7px;
         padding: 15px 0;
+
         text-align: center;
     }
+
 }
+
+
+/* 20. SMALL MOBILE SCREENS */
 
 @media (max-width: 360px) {
 
@@ -479,4 +656,15 @@ form {
         padding-left: 18px;
         padding-right: 18px;
     }
+
+    .brand {
+        gap: 8px;
+        font-size: 17px;
+    }
+
+    .footer-line {
+        width: 30px;
+    }
+
 }
+```
