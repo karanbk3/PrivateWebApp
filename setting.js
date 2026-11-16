@@ -1,4 +1,3 @@
-
 /*
 ==================================================
 PRIVATE SPACE
@@ -25,17 +24,14 @@ const settingsEmail = document.getElementById("settingsEmail");
 const accountForm = document.getElementById("accountForm");
 const settingsDisplayName = document.getElementById("settingsDisplayName");
 const settingsBio = document.getElementById("settingsBio");
-
 const accountMessage = document.getElementById("accountMessage");
 const saveAccountButton = document.getElementById("saveAccountButton");
 
 // Password settings
 const passwordForm = document.getElementById("passwordForm");
-
 const currentPassword = document.getElementById("currentPassword");
 const newPassword = document.getElementById("newPassword");
 const confirmPassword = document.getElementById("confirmPassword");
-
 const passwordMessage = document.getElementById("passwordMessage");
 const changePasswordButton = document.getElementById("changePasswordButton");
 
@@ -53,15 +49,13 @@ let currentUser = null;
 
 
 // ================================================
-// 2. MESSAGE FUNCTION
+// 2. SHOW MESSAGE
 // ================================================
 
 function showMessage(element, message, type = "error") {
-
     if (!element) return;
 
     element.textContent = message;
-
     element.classList.remove("success", "error");
 
     if (message) {
@@ -71,11 +65,10 @@ function showMessage(element, message, type = "error") {
 
 
 // ================================================
-// 3. BUTTON LOADING FUNCTION
+// 3. BUTTON LOADING
 // ================================================
 
 function setButtonLoading(button, loading, loadingText, normalText) {
-
     if (!button) return;
 
     button.disabled = loading;
@@ -88,7 +81,6 @@ function setButtonLoading(button, loading, loadingText, normalText) {
 // ================================================
 
 function showSettingsPage() {
-
     if (authLoading) {
         authLoading.hidden = true;
     }
@@ -104,7 +96,6 @@ function showSettingsPage() {
 // ================================================
 
 async function logout() {
-
     const buttons = [logoutButton, settingsLogoutButton];
 
     buttons.forEach(button => {
@@ -115,15 +106,13 @@ async function logout() {
     });
 
     try {
-
         const { error } = await supabase.auth.signOut();
 
         if (error) throw error;
 
-        window.location.replace("../login.html");
+        window.location.replace("./login.html");
 
     } catch (error) {
-
         console.error("Logout error:", error);
 
         alert("Unable to sign out. Please try again.");
@@ -139,32 +128,25 @@ async function logout() {
 
 
 // ================================================
-// 6. LOAD ACCOUNT SETTINGS
+// 6. LOAD SETTINGS
 // ================================================
 
 async function loadSettings() {
-
     try {
-
-        // Check whether the member is logged in
-
+        // Check login
         const { data: authData, error: authError } =
             await supabase.auth.getUser();
 
         if (authError) throw authError;
 
         if (!authData.user) {
-
-            window.location.replace("../login.html");
-
+            window.location.replace("./login.html");
             return;
         }
 
         currentUser = authData.user;
 
-
-        // Get public profile information
-
+        // Get account information
         const { data: profile, error: profileError } =
             await supabase
                 .from("profiles")
@@ -178,21 +160,14 @@ async function loadSettings() {
             throw new Error("Profile not found.");
         }
 
-
-        // Check member approval
-
+        // Check approval
         if (profile.approval_status !== "approved") {
-
             await supabase.auth.signOut();
-
-            window.location.replace("../login.html");
-
+            window.location.replace("./login.html");
             return;
         }
 
-
-        // Get private profile information
-
+        // Get private settings
         const { data: privateDetails, error: privateError } =
             await supabase
                 .from("private_profile_details")
@@ -202,19 +177,13 @@ async function loadSettings() {
 
         if (privateError) throw privateError;
 
-
         // Check profile completion
-
         if (!privateDetails || privateDetails.profile_completed !== true) {
-
             window.location.replace("./profile-setup.html");
-
             return;
         }
 
-
-        // Display account name
-
+        // Display name
         const name = profile.display_name || "Member";
 
         if (memberName) {
@@ -229,59 +198,42 @@ async function loadSettings() {
             settingsDisplayName.value = name;
         }
 
-
         // Display email
-
         if (settingsEmail) {
             settingsEmail.textContent = currentUser.email || "";
         }
 
-
         // Display bio
-
         if (settingsBio) {
             settingsBio.value = profile.bio || "";
         }
 
-
         // Display profile picture
-
         if (settingsAvatar) {
-
             if (profile.avatar_url) {
-
                 settingsAvatar.textContent = "";
                 settingsAvatar.style.backgroundImage =
                     `url("${profile.avatar_url}")`;
 
                 settingsAvatar.style.backgroundSize = "cover";
                 settingsAvatar.style.backgroundPosition = "center";
-
             } else {
-
                 settingsAvatar.style.backgroundImage = "none";
                 settingsAvatar.textContent = name.charAt(0).toUpperCase();
             }
         }
 
-
-        // Load privacy preference
-
+        // Display privacy preference
         if (showLocation) {
             showLocation.checked = privateDetails.show_location === true;
         }
 
-
-        // Display settings page
-
         showSettingsPage();
 
     } catch (error) {
-
         console.error("Settings loading error:", error);
 
         if (authLoading) {
-
             authLoading.innerHTML = `
                 <p>We couldn't load your settings.</p>
                 <p>Please refresh the page and try again.</p>
@@ -296,7 +248,6 @@ async function loadSettings() {
 // ================================================
 
 accountForm?.addEventListener("submit", async function (event) {
-
     event.preventDefault();
 
     if (!currentUser) return;
@@ -305,27 +256,29 @@ accountForm?.addEventListener("submit", async function (event) {
     const bio = settingsBio.value.trim();
 
     // Validate display name
-
     if (displayName.length < 2) {
-
         showMessage(
             accountMessage,
             "Your display name must contain at least 2 characters."
         );
-
         return;
     }
 
     if (displayName.length > 60) {
-
         showMessage(
             accountMessage,
             "Your display name cannot exceed 60 characters."
         );
-
         return;
     }
 
+    if (bio.length > 500) {
+        showMessage(
+            accountMessage,
+            "Your bio cannot exceed 500 characters."
+        );
+        return;
+    }
 
     setButtonLoading(
         saveAccountButton,
@@ -336,9 +289,7 @@ accountForm?.addEventListener("submit", async function (event) {
 
     showMessage(accountMessage, "");
 
-
     try {
-
         const { error } = await supabase
             .from("profiles")
             .update({
@@ -349,9 +300,7 @@ accountForm?.addEventListener("submit", async function (event) {
 
         if (error) throw error;
 
-
-        // Update displayed name without refreshing
-
+        // Update the page without refreshing
         if (memberName) {
             memberName.textContent = displayName;
         }
@@ -360,14 +309,10 @@ accountForm?.addEventListener("submit", async function (event) {
             settingsName.textContent = displayName;
         }
 
-        if (settingsAvatar && !currentUser.user_metadata?.avatar_url) {
-
-            if (!settingsAvatar.style.backgroundImage) {
-                settingsAvatar.textContent =
-                    displayName.charAt(0).toUpperCase();
-            }
+        if (settingsAvatar && !settingsAvatar.style.backgroundImage) {
+            settingsAvatar.textContent =
+                displayName.charAt(0).toUpperCase();
         }
-
 
         showMessage(
             accountMessage,
@@ -376,7 +321,6 @@ accountForm?.addEventListener("submit", async function (event) {
         );
 
     } catch (error) {
-
         console.error("Account update error:", error);
 
         showMessage(
@@ -385,7 +329,6 @@ accountForm?.addEventListener("submit", async function (event) {
         );
 
     } finally {
-
         setButtonLoading(
             saveAccountButton,
             false,
@@ -401,67 +344,49 @@ accountForm?.addEventListener("submit", async function (event) {
 // ================================================
 
 passwordForm?.addEventListener("submit", async function (event) {
-
     event.preventDefault();
 
     if (!currentUser || !currentUser.email) return;
 
-    const oldPassword = currentPassword?.value || "";
+    const oldPassword = currentPassword.value;
     const password = newPassword.value;
     const confirmation = confirmPassword.value;
 
-
     // Check current password
-
     if (!oldPassword) {
-
         showMessage(
             passwordMessage,
             "Please enter your current password."
         );
-
         return;
     }
 
-
     // Check new password length
-
     if (password.length < 8) {
-
         showMessage(
             passwordMessage,
             "Your new password must contain at least 8 characters."
         );
-
         return;
     }
 
-
-    // Check password confirmation
-
+    // Check confirmation
     if (password !== confirmation) {
-
         showMessage(
             passwordMessage,
             "Your new passwords do not match."
         );
-
         return;
     }
 
-
-    // Prevent using the same password
-
+    // Check whether the new password is different
     if (oldPassword === password) {
-
         showMessage(
             passwordMessage,
             "Choose a different password from your current password."
         );
-
         return;
     }
-
 
     setButtonLoading(
         changePasswordButton,
@@ -472,12 +397,8 @@ passwordForm?.addEventListener("submit", async function (event) {
 
     showMessage(passwordMessage, "");
 
-
     try {
-
-        // Verify the current password by signing in again.
-        // This checks the password without changing the session.
-
+        // Verify the current password
         const { error: verifyError } =
             await supabase.auth.signInWithPassword({
                 email: currentUser.email,
@@ -485,13 +406,10 @@ passwordForm?.addEventListener("submit", async function (event) {
             });
 
         if (verifyError) {
-
             throw new Error("Your current password is incorrect.");
         }
 
-
-        // Change password
-
+        // Update password
         const { error: updateError } =
             await supabase.auth.updateUser({
                 password: password
@@ -499,11 +417,8 @@ passwordForm?.addEventListener("submit", async function (event) {
 
         if (updateError) throw updateError;
 
-
         // Clear password fields
-
         passwordForm.reset();
-
 
         showMessage(
             passwordMessage,
@@ -512,7 +427,6 @@ passwordForm?.addEventListener("submit", async function (event) {
         );
 
     } catch (error) {
-
         console.error("Password change error:", error);
 
         showMessage(
@@ -521,7 +435,6 @@ passwordForm?.addEventListener("submit", async function (event) {
         );
 
     } finally {
-
         setButtonLoading(
             changePasswordButton,
             false,
@@ -537,8 +450,7 @@ passwordForm?.addEventListener("submit", async function (event) {
 // ================================================
 
 savePrivacyButton?.addEventListener("click", async function () {
-
-    if (!currentUser) return;
+    if (!currentUser || !showLocation) return;
 
     setButtonLoading(
         savePrivacyButton,
@@ -549,27 +461,16 @@ savePrivacyButton?.addEventListener("click", async function () {
 
     showMessage(privacyMessage, "");
 
-
     try {
-
         const { error } = await supabase
             .from("private_profile_details")
-            .upsert({
-
-                user_id: currentUser.id,
-
+            .update({
                 show_location: showLocation.checked,
-
                 updated_at: new Date().toISOString()
-
-            }, {
-
-                onConflict: "user_id"
-
-            });
+            })
+            .eq("user_id", currentUser.id);
 
         if (error) throw error;
-
 
         showMessage(
             privacyMessage,
@@ -578,7 +479,6 @@ savePrivacyButton?.addEventListener("click", async function () {
         );
 
     } catch (error) {
-
         console.error("Privacy settings error:", error);
 
         showMessage(
@@ -587,7 +487,6 @@ savePrivacyButton?.addEventListener("click", async function () {
         );
 
     } finally {
-
         setButtonLoading(
             savePrivacyButton,
             false,
@@ -603,7 +502,6 @@ savePrivacyButton?.addEventListener("click", async function () {
 // ================================================
 
 logoutButton?.addEventListener("click", logout);
-
 settingsLogoutButton?.addEventListener("click", logout);
 
 
