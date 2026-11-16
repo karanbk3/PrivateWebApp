@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,35 +8,39 @@
 
     <title>Discussions | PrivateSpace</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../discussions.css">
+    <!-- CSS files: both in the root folder -->
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./discussions.css">
 </head>
 
 <body>
 
+    <!-- ACCOUNT CHECKING -->
     <div id="authLoading" class="loading-screen">
         <div class="loading-icon"></div>
         <p>Checking your account...</p>
     </div>
 
+    <!-- PROTECTED PAGE -->
     <div id="protectedContent" hidden>
 
         <!-- HEADER -->
         <header class="dashboard-header">
 
-            <a href="../main.html" class="brand">
+            <a href="./main.html" class="brand">
                 <span class="brand-icon">P</span>
                 <span>Private<span class="brand-light">Space</span></span>
             </a>
 
             <nav class="top-navigation">
-                <a href="../main.html">Home</a>
+                <a href="./main.html">Home</a>
                 <a href="./discussions.html" class="active">Discussions</a>
                 <a href="./profile.html">My Profile</a>
             </nav>
@@ -69,10 +73,10 @@
 
         </header>
 
-
         <!-- MAIN CONTENT -->
         <main class="discussions-page">
 
+            <!-- INTRODUCTION -->
             <section class="discussions-intro">
 
                 <span class="section-eyebrow">
@@ -89,7 +93,6 @@
                 </p>
 
             </section>
-
 
             <!-- SEARCH -->
             <section class="discussion-tools">
@@ -111,8 +114,7 @@
 
             </section>
 
-
-            <!-- FEED -->
+            <!-- DISCUSSION FEED -->
             <section class="all-discussions">
 
                 <div id="discussionFeed"
@@ -126,7 +128,7 @@
 
             </section>
 
-
+            <!-- FOOTER -->
             <footer class="dashboard-footer">
                 <p>
                     PrivateSpace · A community built on respect and trust.
@@ -137,8 +139,7 @@
 
     </div>
 
-
-    <!-- FULL DISCUSSION POPUP -->
+    <!-- FULL DISCUSSION MODAL -->
     <div id="discussionModal"
          class="discussion-modal"
          hidden>
@@ -151,6 +152,7 @@
                  aria-modal="true"
                  aria-labelledby="modalTitle">
 
+            <!-- MODAL HEADER -->
             <div class="modal-header">
 
                 <div>
@@ -172,12 +174,10 @@
 
             </div>
 
-
-            <!-- COMPLETE POST -->
+            <!-- COMPLETE DISCUSSION -->
             <div id="modalPostContent"
                  class="modal-post-content">
             </div>
-
 
             <!-- COMMENTS -->
             <section class="comments-section">
@@ -200,8 +200,7 @@
                         maxlength="2000"
                         rows="2"
                         placeholder="Write a comment..."
-                        required>
-                    </textarea>
+                        required></textarea>
 
                     <button type="submit"
                             id="commentSubmitButton">
@@ -219,9 +218,9 @@
 
     </div>
 
-
-    <script type="module"
-            src="../discussions.js"></script>
+    <!-- JAVASCRIPT -->
+    <script type="module" src="./discussions.js"></script>
 
 </body>
 </html>
+```
