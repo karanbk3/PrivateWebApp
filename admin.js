@@ -2,7 +2,7 @@
 import { supabase } from "./supabase.js";
 
 // ========================================
-// 1. GET PAGE ELEMENTS
+// 1. PAGE ELEMENTS
 // ========================================
 
 const loading = document.getElementById("dashboardLoading");
@@ -11,6 +11,7 @@ const errorMessage = document.getElementById("errorMessage");
 const dashboardContent = document.getElementById("dashboardContent");
 
 const adminName = document.getElementById("adminName");
+const adminAvatar = document.getElementById("adminAvatar");
 const welcomeName = document.getElementById("welcomeName");
 
 const totalMembers = document.getElementById("totalMembers");
@@ -35,23 +36,29 @@ const dashboardMessage = document.getElementById("dashboardMessage");
 
 
 // ========================================
-// 2. STORE DATA
+// 2. DATA
 // ========================================
 
 let currentAdmin = null;
 let members = [];
+let updatingMemberId = null;
 
 
 // ========================================
-// 3. SHOW MESSAGES
+// 3. MESSAGES
 // ========================================
 
-function showDashboardMessage(message, isError = false) {
+function showMessage(message, isError = false) {
     dashboardMessage.textContent = message;
     dashboardMessage.hidden = false;
 
-    dashboardMessage.style.background = isError ? "#fff1f2" : "#e8f8f0";
-    dashboardMessage.style.color = isError ? "#a52c3a" : "#14734f";
+    dashboardMessage.style.background = isError
+        ? "#fff1f2"
+        : "#e8f8f0";
+
+    dashboardMessage.style.color = isError
+        ? "#a52c3a"
+        : "#14734f";
 }
 
 function showAccessError(message) {
@@ -69,25 +76,22 @@ function showAccessError(message) {
 
 async function checkAdminAccess() {
     try {
-        const { data: userData, error: authError } =
-            await supabase.auth.getUser();
+        const { data, error } = await supabase.auth.getUser();
 
-        if (authError || !userData.user) {
-            window.location.href = "../login.html";
+        if (error || !data.user) {
+            window.location.replace("./login.html");
             return;
         }
-
-        const user = userData.user;
 
         const { data: profile, error: profileError } =
             await supabase
                 .from("profiles")
                 .select("id, display_name, role, approval_status")
-                .eq("id", user.id)
+                .eq("id", data.user.id)
                 .maybeSingle();
 
         if (profileError || !profile) {
-            showAccessError("Your profile could not be verified.");
+            showAccessError("Your account profile could not be verified.");
             return;
         }
 
@@ -95,9 +99,7 @@ async function checkAdminAccess() {
             profile.role !== "admin" ||
             profile.approval_status !== "approved"
         ) {
-            showAccessError(
-                "You do not have approved administrator access."
-            );
+            showAccessError("You do not have approved administrator access.");
             return;
         }
 
@@ -107,6 +109,7 @@ async function checkAdminAccess() {
 
         adminName.textContent = name;
         welcomeName.textContent = name;
+        adminAvatar.textContent = name.trim().charAt(0).toUpperCase() || "A";
 
         loading.hidden = true;
         dashboardError.hidden = true;
@@ -116,13 +119,13 @@ async function checkAdminAccess() {
 
     } catch (error) {
         console.error("Admin access error:", error);
-        showAccessError("Something went wrong while checking access.");
+        showAccessError("Something went wrong while checking administrator access.");
     }
 }
 
 
 // ========================================
-// 5. LOAD MEMBERS FROM SUPABASE
+// 5. LOAD MEMBERS
 // ========================================
 
 async function loadMembers() {
@@ -132,13 +135,11 @@ async function loadMembers() {
     try {
         const { data, error } = await supabase
             .from("profiles")
-            .select("id, display_name, role, approval_status, created_at")
+            .select("id, display_name, role, approval_status, created_at, avatar_url")
             .eq("role", "member")
             .order("created_at", { ascending: false });
 
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
 
         members = data || [];
 
@@ -151,7 +152,7 @@ async function loadMembers() {
     } catch (error) {
         console.error("Member loading error:", error);
 
-        showDashboardMessage(
+        showMessage(
             "Could not load members. Please check your database permissions.",
             true
         );
@@ -164,7 +165,7 @@ async function loadMembers() {
 
 
 // ========================================
-// 6. UPDATE DASHBOARD STATISTICS
+// 6. UPDATE STATISTICS
 // ========================================
 
 function updateStatistics() {
@@ -191,17 +192,30 @@ function updateStatistics() {
 
 
 // ========================================
-// 7. CREATE MEMBER AVATAR
+// 7. CREATE AVATAR
 // ========================================
 
-function createAvatar(name) {
+function createAvatar(member) {
     const avatar = document.createElement("div");
-
     avatar.className = "member-avatar";
 
-    avatar.textContent = (
-        name.trim().charAt(0) || "M"
-    ).toUpperCase();
+    const name = member.display_name || "Member";
+
+    if (member.avatar_url) {
+        const image = document.createElement("img");
+
+        image.src = member.avatar_url;
+        image.alt = `${name}'s profile picture`;
+
+        image.addEventListener("error", () => {
+            avatar.replaceChildren();
+            avatar.textContent = name.trim().charAt(0).toUpperCase() || "M";
+        });
+
+        avatar.appendChild(image);
+    } else {
+        avatar.textContent = name.trim().charAt(0).toUpperCase() || "M";
+    }
 
     return avatar;
 }
@@ -217,7 +231,7 @@ function createMemberRow(member, showActions = false) {
 
     const name = member.display_name || "Unnamed member";
 
-    const avatar = createAvatar(name);
+    const avatar = createAvatar(member);
 
     const information = document.createElement("div");
     information.className = "member-information";
@@ -239,23 +253,20 @@ function createMemberRow(member, showActions = false) {
     actions.className = "member-actions";
 
     const status = document.createElement("span");
-    status.className =
-        `member-status ${member.approval_status}`;
+    const approvalStatus = member.approval_status || "unknown";
 
-    status.textContent = member.approval_status || "unknown";
+    status.className = `member-status ${approvalStatus}`;
+    status.textContent = approvalStatus;
 
     actions.appendChild(status);
 
-    if (
-        showActions &&
-        member.approval_status === "pending"
-    ) {
+    if (showActions && approvalStatus === "pending") {
         const approveButton = document.createElement("button");
 
-        approveButton.className =
-            "action-button approve-button";
-
+        approveButton.type = "button";
+        approveButton.className = "action-button approve-button";
         approveButton.textContent = "Approve";
+        approveButton.disabled = updatingMemberId !== null;
 
         approveButton.addEventListener("click", () => {
             updateMemberApproval(member.id, "approved");
@@ -263,10 +274,10 @@ function createMemberRow(member, showActions = false) {
 
         const rejectButton = document.createElement("button");
 
-        rejectButton.className =
-            "action-button reject-button";
-
+        rejectButton.type = "button";
+        rejectButton.className = "action-button reject-button";
         rejectButton.textContent = "Reject";
+        rejectButton.disabled = updatingMemberId !== null;
 
         rejectButton.addEventListener("click", () => {
             updateMemberApproval(member.id, "rejected");
@@ -282,7 +293,7 @@ function createMemberRow(member, showActions = false) {
 
 
 // ========================================
-// 9. SHOW PENDING MEMBERS
+// 9. PENDING MEMBERS
 // ========================================
 
 function renderPendingMembers() {
@@ -295,24 +306,19 @@ function renderPendingMembers() {
     noPendingMessage.hidden = pending.length !== 0;
 
     pending.forEach(member => {
-        pendingList.appendChild(
-            createMemberRow(member, true)
-        );
+        pendingList.appendChild(createMemberRow(member, true));
     });
 }
 
 
 // ========================================
-// 10. SHOW ALL MEMBERS
+// 10. ALL MEMBERS
 // ========================================
 
 function renderAllMembers() {
     allMembersList.replaceChildren();
 
-    const searchText = memberSearch.value
-        .trim()
-        .toLowerCase();
-
+    const searchText = memberSearch.value.trim().toLowerCase();
     const selectedStatus = statusFilter.value;
 
     const filteredMembers = members.filter(member => {
@@ -330,46 +336,35 @@ function renderAllMembers() {
     noMembersMessage.hidden = filteredMembers.length !== 0;
 
     filteredMembers.forEach(member => {
-        allMembersList.appendChild(
-            createMemberRow(member, false)
-        );
+        allMembersList.appendChild(createMemberRow(member));
     });
 }
 
 
 // ========================================
-// 11. APPROVE OR REJECT MEMBER
+// 11. APPROVE OR REJECT
 // ========================================
 
 async function updateMemberApproval(userId, newStatus) {
-    const member = members.find(
-        item => item.id === userId
-    );
+    if (updatingMemberId !== null) return;
 
-    if (!member) {
-        return;
-    }
+    const member = members.find(item => item.id === userId);
 
-    const actionName =
-        newStatus === "approved" ? "approve" : "reject";
+    if (!member) return;
+
+    const actionName = newStatus === "approved" ? "approve" : "reject";
+    const memberName = member.display_name || "this member";
 
     const confirmed = window.confirm(
-        `Are you sure you want to ${actionName} ${member.display_name || "this member"}?`
+        `Are you sure you want to ${actionName} ${memberName}?`
     );
 
-    if (!confirmed) {
-        return;
-    }
+    if (!confirmed) return;
+
+    updatingMemberId = userId;
+    renderPendingMembers();
 
     try {
-        const buttons = document.querySelectorAll(
-            ".member-actions button"
-        );
-
-        buttons.forEach(button => {
-            button.disabled = true;
-        });
-
         const { error } = await supabase.rpc(
             "admin_set_member_approval",
             {
@@ -378,24 +373,22 @@ async function updateMemberApproval(userId, newStatus) {
             }
         );
 
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
 
-        showDashboardMessage(
-            `Member ${newStatus} successfully.`
-        );
+        showMessage(`${memberName} has been ${newStatus} successfully.`);
 
         await loadMembers();
 
     } catch (error) {
         console.error("Approval error:", error);
 
-        showDashboardMessage(
+        showMessage(
             error.message || "Unable to update member status.",
             true
         );
 
+    } finally {
+        updatingMemberId = null;
         renderPendingMembers();
     }
 }
@@ -406,12 +399,11 @@ async function updateMemberApproval(userId, newStatus) {
 // ========================================
 
 memberSearch.addEventListener("input", renderAllMembers);
-
 statusFilter.addEventListener("change", renderAllMembers);
 
 
 // ========================================
-// 13. REFRESH DASHBOARD
+// 13. REFRESH
 // ========================================
 
 refreshButton.addEventListener("click", loadMembers);
@@ -422,25 +414,28 @@ refreshButton.addEventListener("click", loadMembers);
 // ========================================
 
 logoutButton.addEventListener("click", async () => {
-    const confirmed = window.confirm(
-        "Are you sure you want to sign out?"
-    );
+    const confirmed = window.confirm("Are you sure you want to sign out?");
 
-    if (!confirmed) {
-        return;
+    if (!confirmed) return;
+
+    logoutButton.disabled = true;
+    logoutButton.textContent = "Signing out...";
+
+    try {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) throw error;
+
+        window.location.replace("./login.html");
+
+    } catch (error) {
+        console.error("Sign out error:", error);
+
+        showMessage("Unable to sign out. Please try again.", true);
+
+        logoutButton.disabled = false;
+        logoutButton.textContent = "↪ Sign out";
     }
-
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-        showDashboardMessage(
-            "Unable to sign out. Please try again.",
-            true
-        );
-        return;
-    }
-
-    window.location.href = "../login.html";
 });
 
 
