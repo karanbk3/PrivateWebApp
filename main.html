@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PrivateSpace | Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <div id="authLoading" class="loading-screen">
+        <div class="loading-icon">P</div>
+        <p>Preparing PrivateSpace...</p>
+    </div>
+
+    <div id="protectedContent" hidden>
+
+        <!-- Navigation -->
+        <header class="site-header">
+            <a href="./main.html" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Private<span class="brand-light">Space</span></span>
+            </a>
+
+            <nav class="top-navigation">
+                <a href="./main.html" class="active">Home</a>
+                <a href="./pages/discussions.html">Discussions</a>
+                <a href="./pages/profile.html">My Profile</a>
+            </nav>
+
+            <div class="header-actions">
+                <span class="online-indicator"></span>
+                <span class="member-label">PRIVATE COMMUNITY</span>
+                <button id="logoutButton" class="logout-button">
+                    Sign out
+                </button>
+            </div>
+        </header>
+
+        <main class="home-container">
+
+            <!-- Hero -->
+            <section class="hero-section">
+                <span class="hero-label">
+                    <span class="hero-label-dot"></span>
+                    YOUR PRIVATE ONLINE COMMUNITY
+                </span>
+
+                <h1>
+                    A space to connect.<br>
+                    <span>A place to belong.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Welcome to PrivateSpace — a members-only community
+                    where people can share ideas, have meaningful
+                    conversations and stay connected.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="./pages/discussions.html" class="primary-button">
+                        Explore discussions <span>→</span>
+                    </a>
+
+                    <a href="./pages/profile.html" class="secondary-button">
+                        View my profile
+                    </a>
+                </div>
+
+                <p class="welcome-member" id="memberGreeting">
+                    Welcome to your community.
+                </p>
+
+                <div class="hero-decoration">✦</div>
+            </section>
+
+            <!-- About -->
+            <section class="content-section about-section" id="about">
+
+                <div class="section-label">GET TO KNOW US</div>
+
+                <h2>What is <span>PrivateSpace?</span></h2>
+
+                <p class="section-description">
+                    PrivateSpace is a private online community created
+                    to bring approved members together in one welcoming
+                    digital space.
+                </p>
+
+                <p class="about-detail">
+                    It gives members a place to express their thoughts,
+                    exchange ideas, discover different perspectives
+                    and build meaningful connections. Our goal is to
+                    make online conversations more personal, respectful
+                    and enjoyable.
+                </p>
+
+            </section>
+
+            <!-- Features -->
+            <section class="content-section features-section" id="features">
+
+                <div class="section-label">EXPLORE THE EXPERIENCE</div>
+
+                <h2>Everything in <span>one space.</span></h2>
+
+                <p class="section-description">
+                    Simple tools designed to help our community
+                    communicate and grow together.
+                </p>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">✧</div>
+                        <h3>Meaningful discussions</h3>
+                        <p>
+                            Share your thoughts, ask questions
+                            and take part in conversations.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">◎</div>
+                        <h3>Member profiles</h3>
+                        <p>
+                            Discover community members and
+                            learn more about their public profiles.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">♡</div>
+                        <h3>A respectful community</h3>
+                        <p>
+                            Connect with others in a space
+                            built around kindness and respect.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">◈</div>
+                        <h3>Stay updated</h3>
+                        <p>
+                            Keep up with important announcements
+                            and newly introduced features.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">⌕</div>
+                        <h3>Find conversations</h3>
+                        <p>
+                            Search discussions and explore
+                            topics shared by members.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">✦</div>
+                        <h3>Private membership</h3>
+                        <p>
+                            A community space designed for
+                            approved members.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Community values -->
+            <section class="values-section">
+                <div class="section-label">OUR COMMUNITY VALUES</div>
+
+                <h2>Good conversations start with <span>respect.</span></h2>
+
+                <div class="values-list">
+                    <div>01 <span>Respect different opinions.</span></div>
+                    <div>02 <span>Share thoughtfully and responsibly.</span></div>
+                    <div>03 <span>Respect everyone's privacy.</span></div>
+                    <div>04 <span>Help make the community welcoming.</span></div>
+                </div>
+            </section>
+
+            <!-- Admin announcements -->
+            <section class="content-section updates-section" id="updates">
+
+                <div class="section-label">OFFICIAL ANNOUNCEMENTS</div>
+
+                <h2>What's <span>new?</span></h2>
+
+                <p class="section-description">
+                    Discover new features, improvements and important
+                    announcements published by the PrivateSpace admin.
+                </p>
+
+                <div id="updatesList" class="updates-list">
+                    <div class="update-empty">
+                        <div class="update-empty-icon">✧</div>
+                        <h3>Nothing new just yet.</h3>
+                        <p>
+                            When the administrator publishes an update,
+                            it will appear here.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Closing section -->
+            <section class="closing-section">
+                <div class="closing-symbol">✦</div>
+
+                <h2>Your space.<br><span>Your community.</span></h2>
+
+                <p>
+                    Every meaningful connection begins
+                    with a conversation.
+                </p>
+
+                <a href="./pages/discussions.html" class="primary-button">
+                    Join the conversation <span>→</span>
+                </a>
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <a href="./main.html" class="footer-brand">
+                Private<span>Space</span>
+            </a>
+
+            <p>A community built on respect and trust.</p>
+
+            <span>© 2026 PrivateSpace</span>
+        </footer>
+
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

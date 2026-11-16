@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | PrivateSpace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+</head>
+
+<body>
+
+    <!-- AUTHENTICATION LOADING -->
+    <div id="authLoading" class="loading-screen">
+        <div class="loading-icon"></div>
+        <p>Checking your account...</p>
+    </div>
+
+
+    <!-- PROTECTED PAGE -->
+    <div id="protectedContent" hidden>
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <a href="../main.html" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Private<span class="brand-light">Space</span></span>
+            </a>
+
+            <nav class="top-navigation">
+                <a href="../main.html">Home</a>
+                <a href="./discussions.html">Discussions</a>
+                <a href="./profile.html">My Profile</a>
+            </nav>
+
+            <div class="header-actions">
+
+                <span id="memberName" class="member-label">
+                    Member
+                </span>
+
+                <button id="logoutButton"
+                        class="logout-button"
+                        type="button">
+                    Sign out
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="notifications-page">
+
+            <section class="notifications-intro">
+
+                <span class="section-eyebrow">
+                    STAY CONNECTED
+                </span>
+
+                <h1>Your <span>Notifications</span></h1>
+
+                <p>
+                    Keep track of comments, replies, and conversations
+                    happening around your discussions.
+                </p>
+
+            </section>
+
+
+            <!-- NOTIFICATION SUMMARY -->
+            <section class="notification-summary">
+
+                <div>
+                    <span class="summary-label">UNREAD NOTIFICATIONS</span>
+                    <h2 id="unreadCount">0</h2>
+                </div>
+
+                <button id="refreshButton"
+                        class="refresh-button"
+                        type="button">
+                    ↻ Refresh
+                </button>
+
+            </section>
+
+
+            <!-- NOTIFICATION LIST -->
+            <section class="notification-section">
+
+                <div class="notification-section-heading">
+                    <h2>Recent activity</h2>
+
+                    <button id="markAllReadButton"
+                            class="mark-all-button"
+                            type="button">
+                        Mark all as read
+                    </button>
+                </div>
+
+                <div id="notificationList"
+                     class="notification-list">
+
+                    <div class="notification-empty">
+                        Loading notifications...
+                    </div>
+
+                </div>
+
+                <p id="notificationMessage"
+                   class="notification-message"></p>
+
+            </section>
+
+
+            <footer class="notifications-footer">
+                PrivateSpace · Stay connected with your community.
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script type="module"
+            src="../js/notifications.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Discussions | PrivateSpace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/discussions.css">
+</head>
+
+<body>
+
+    <div id="authLoading" class="loading-screen">
+        <div class="loading-icon"></div>
+        <p>Checking your account...</p>
+    </div>
+
+    <div id="protectedContent" hidden>
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <a href="../main.html" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Private<span class="brand-light">Space</span></span>
+            </a>
+
+            <nav class="top-navigation">
+                <a href="../main.html">Home</a>
+                <a href="./discussions.html" class="active">Discussions</a>
+                <a href="./profile.html">My Profile</a>
+            </nav>
+
+            <div class="header-actions">
+
+                <a href="./notifications.html"
+                   class="notification-link"
+                   aria-label="Notifications">
+
+                    <span class="notification-icon">♧</span>
+                    <span>Notifications</span>
+
+                    <span id="notificationBadge"
+                          class="notification-badge"
+                          hidden>0</span>
+                </a>
+
+                <span class="member-label" id="memberName">
+                    Member
+                </span>
+
+                <button id="logoutButton"
+                        class="logout-button"
+                        type="button">
+                    Sign out
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="discussions-page">
+
+            <section class="discussions-intro">
+
+                <span class="section-eyebrow">
+                    YOUR PRIVATE COMMUNITY
+                </span>
+
+                <h1>
+                    Community <span>Discussions</span>
+                </h1>
+
+                <p>
+                    Read ideas, share perspectives, and have
+                    meaningful conversations with members.
+                </p>
+
+            </section>
+
+
+            <!-- SEARCH -->
+            <section class="discussion-tools">
+
+                <div class="search-box">
+                    <span>⌕</span>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search discussions or members..."
+                        autocomplete="off">
+                </div>
+
+                <div id="discussionCount"
+                     class="discussion-count">
+                    Loading discussions...
+                </div>
+
+            </section>
+
+
+            <!-- FEED -->
+            <section class="all-discussions">
+
+                <div id="discussionFeed"
+                     class="discussion-list">
+
+                    <div class="empty-feed">
+                        Loading community discussions...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer class="dashboard-footer">
+                <p>
+                    PrivateSpace · A community built on respect and trust.
+                </p>
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- FULL DISCUSSION POPUP -->
+    <div id="discussionModal"
+         class="discussion-modal"
+         hidden>
+
+        <div class="discussion-modal-backdrop"
+             id="modalBackdrop"></div>
+
+        <section class="discussion-modal-content"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="modalTitle">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="section-eyebrow">
+                        COMMUNITY CONVERSATION
+                    </span>
+
+                    <h2 id="modalTitle">
+                        Discussion
+                    </h2>
+                </div>
+
+                <button id="closeDiscussionModal"
+                        class="modal-close"
+                        type="button"
+                        aria-label="Close discussion">
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- COMPLETE POST -->
+            <div id="modalPostContent"
+                 class="modal-post-content">
+            </div>
+
+
+            <!-- COMMENTS -->
+            <section class="comments-section">
+
+                <div class="comments-heading">
+                    <h3>Comments</h3>
+                    <span id="commentCount">0 comments</span>
+                </div>
+
+                <div id="commentList"
+                     class="comment-list">
+                </div>
+
+                <!-- ADD COMMENT -->
+                <form id="commentForm"
+                      class="comment-form">
+
+                    <textarea
+                        id="commentInput"
+                        maxlength="2000"
+                        rows="2"
+                        placeholder="Write a comment..."
+                        required>
+                    </textarea>
+
+                    <button type="submit"
+                            id="commentSubmitButton">
+                        Comment
+                    </button>
+
+                    <p id="commentMessage"
+                       class="form-message"></p>
+
+                </form>
+
+            </section>
+
+        </section>
+
+    </div>
+
+
+    <script type="module"
+            src="../js/discussions.js"></script>
+
+</body>
+</html>

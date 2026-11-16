@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complete Your Profile | PrivateSpace</title>
+
+    <link rel="stylesheet" href="../css/profile-setup.css">
+</head>
+
+<body>
+
+    <main class="setup-container">
+
+        <div class="setup-card">
+
+            <!-- Brand -->
+            <div class="brand">
+                <div class="brand-icon">P</div>
+                <span>Private<span class="brand-light">Space</span></span>
+            </div>
+
+            <!-- Introduction -->
+            <div class="setup-heading">
+                <span class="step-label">YOUR FIRST STEP</span>
+
+                <h1>Let's get to know you.</h1>
+
+                <p>
+                    Complete your profile so other community members
+                    can recognize you.
+                </p>
+            </div>
+
+            <form id="profileSetupForm">
+
+                <!-- Profile Photo -->
+                <div class="photo-section">
+
+                    <div class="avatar-preview" id="avatarPreview">
+                        <span>👤</span>
+                    </div>
+
+                    <div class="photo-details">
+                        <label for="profilePhoto">Profile photo</label>
+
+                        <p>Choose a photo to represent you.</p>
+
+                        <input
+                            type="file"
+                            id="profilePhoto"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+                    </div>
+
+                </div>
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label for="fullName">Your full name</label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your name"
+                        maxlength="60"
+                        required
+                    >
+
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="form-group">
+
+                    <label for="dateOfBirth">Date of birth</label>
+
+                    <input
+                        type="date"
+                        id="dateOfBirth"
+                        required
+                    >
+
+                    <small>
+                        Your date of birth will remain private.
+                    </small>
+
+                </div>
+
+                <!-- Location -->
+                <div class="location-heading">
+
+                    <h2>Your location</h2>
+
+                    <p>
+                        Choose where you currently live in Nepal.
+                    </p>
+
+                </div>
+
+                <!-- Province -->
+                <div class="form-group">
+
+                    <label for="province">Province</label>
+
+                    <select id="province" required>
+
+                        <option value="">Select province</option>
+
+                        <option value="Koshi">Koshi Province</option>
+
+                        <option value="Madhesh">Madhesh Province</option>
+
+                        <option value="Bagmati">Bagmati Province</option>
+
+                        <option value="Gandaki">Gandaki Province</option>
+
+                        <option value="Lumbini">Lumbini Province</option>
+
+                        <option value="Karnali">Karnali Province</option>
+
+                        <option value="Sudurpashchim">
+                            Sudurpashchim Province
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- District -->
+                <div class="form-group">
+
+                    <label for="district">District</label>
+
+                    <select id="district" required disabled>
+
+                        <option value="">
+                            Select province first
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Location Privacy -->
+                <label class="privacy-option">
+
+                    <input
+                        type="checkbox"
+                        id="showLocation"
+                    >
+
+                    <span>
+                        Allow other members to see my district and province.
+                    </span>
+
+                </label>
+
+                <p class="privacy-note">
+                    Your location is private unless you choose to share it.
+                    Your date of birth is always private.
+                </p>
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    id="saveProfileButton"
+                >
+                    Complete my profile
+                </button>
+
+                <p
+                    id="setupMessage"
+                    class="setup-message"
+                ></p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/profile-setup.js"></script>
+
+</body>
+
+</html>

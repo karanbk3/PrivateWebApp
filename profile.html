@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | PrivateSpace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <a href="../main.html" class="brand">PrivateSpace</a>
+
+        <nav class="navigation">
+
+            <a href="../main.html">Home</a>
+
+            <a href="./discussions.html">Discussions</a>
+
+            <a href="./profile.html" class="active">My Profile</a>
+
+            <!-- Only visible to an approved admin -->
+            <a href="./admin.html"
+               id="adminDashboardLink"
+               class="admin-dashboard-link"
+               hidden>
+                <span>⚙</span> Admin Dashboard
+            </a>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <a href="./setting.html" class="settings-button">
+                Settings
+            </a>
+
+            <button type="button" id="logoutButton" class="logout-button">
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="page-container">
+
+        <div id="profileLoading" class="loading-message">
+            Loading your profile...
+        </div>
+
+        <div id="profileError" class="error-message" hidden></div>
+
+
+        <div id="profileContent" hidden>
+
+            <section class="profile-cover">
+
+                <div class="cover-decoration"></div>
+
+                <div class="profile-heading">
+
+                    <div class="avatar-wrapper">
+
+                        <img
+                            id="profileAvatar"
+                            class="profile-avatar"
+                            src=""
+                            alt="Profile picture"
+                            draggable="false"
+                            hidden
+                        >
+
+                        <div id="avatarFallback" class="avatar-fallback">
+                            ?
+                        </div>
+
+                        <label
+                            for="profilePhotoInput"
+                            id="changePhotoButton"
+                            class="change-photo-button"
+                            title="Change profile picture">
+                            <span>+</span>
+                        </label>
+
+                        <input
+                            type="file"
+                            id="profilePhotoInput"
+                            accept="image/jpeg,image/png,image/webp"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <div class="profile-heading-info">
+
+                        <h1 id="profileName">Member Name</h1>
+
+                        <p id="profileRole">Member</p>
+
+                        <p id="profileWelcome">
+                            Welcome to your profile
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="information-card">
+
+                <div class="card-heading">
+
+                    <h2>About Me</h2>
+
+                    <span class="public-label">
+                        Public information
+                    </span>
+
+                </div>
+
+                <p id="profileBio" class="profile-bio">
+                    No biography added yet.
+                </p>
+
+                <div class="information-divider"></div>
+
+                <div class="profile-details">
+
+                    <div class="detail-item">
+
+                        <span class="detail-icon">👤</span>
+
+                        <div>
+                            <small>Name</small>
+                            <p id="detailName">Not available</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item" id="locationDetail">
+
+                        <span class="detail-icon">📍</span>
+
+                        <div>
+                            <small>Location</small>
+                            <p id="detailLocation">Not shared</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-icon">⭐</span>
+
+                        <div>
+                            <small>Member role</small>
+                            <p id="detailRole">Member</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p id="privateInformationNote" class="privacy-note">
+                    Your date of birth and email are private.
+                </p>
+
+            </section>
+
+
+            <section id="createDiscussionSection" class="composer-card">
+
+                <div class="composer-heading">
+
+                    <h2>Create a discussion</h2>
+
+                    <p>Share something with your community.</p>
+
+                </div>
+
+                <form id="newDiscussionForm">
+
+                    <textarea
+                        id="newDiscussionContent"
+                        maxlength="5000"
+                        rows="4"
+                        placeholder="What's on your mind?"
+                        required></textarea>
+
+                    <div class="composer-bottom">
+
+                        <span>Share your thoughts respectfully.</span>
+
+                        <button type="submit" id="newDiscussionButton">
+                            Publish
+                        </button>
+
+                    </div>
+
+                    <p id="newDiscussionMessage" class="form-message"></p>
+
+                </form>
+
+            </section>
+
+
+            <section class="timeline-section">
+
+                <div class="timeline-heading">
+
+                    <div>
+
+                        <h2 id="timelineTitle">My Discussions</h2>
+
+                        <p>
+                            Posts shared with the PrivateSpace community.
+                        </p>
+
+                    </div>
+
+                    <span id="postCount" class="post-count">
+                        0 discussions
+                    </span>
+
+                </div>
+
+                <div id="memberPosts" class="post-list"></div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script type="module" src="../js/profile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PrivateSpace | Sign In</title>
+
+    <!-- Website fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- Login page design -->
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+
+    <!-- Background lighting -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <main class="page-container">
+
+        <!-- Top navigation -->
+        <header class="top-header">
+
+            <a href="./index.html" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Private<span class="brand-light">Space</span></span>
+            </a>
+
+            <span class="private-label">
+                <span class="status-dot"></span>
+                PRIVATE COMMUNITY
+            </span>
+
+        </header>
+
+        <!-- Login area -->
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <div class="card-decoration"></div>
+
+                <div class="welcome-icon">
+                    <span>✦</span>
+                </div>
+
+                <p class="eyebrow">A PLACE OF YOUR OWN</p>
+
+                <h1>Welcome <span>back.</span></h1>
+
+                <p class="subtitle">
+                    Sign in to enter your private space.
+                    Your conversations belong here.
+                </p>
+
+                <!-- Login form -->
+                <form id="loginForm">
+
+                    <div class="form-group">
+
+                        <label for="email">Email address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="password-heading">
+                            <label for="password">Password</label>
+                        </div>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- Login messages appear here -->
+                    <p id="loginMessage" class="login-message" role="status"></p>
+
+                    <button type="submit" id="loginButton">
+
+                        <span>Enter your space</span>
+                        <span class="button-arrow">→</span>
+
+                    </button>
+
+                </form>
+
+                <div class="card-footer">
+
+                    <span class="footer-line"></span>
+                    <span>MEMBERS ONLY</span>
+                    <span class="footer-line"></span>
+
+                </div>
+
+            </div>
+
+            <p class="bottom-note">
+                A quieter corner of the internet.
+            </p>
+
+        </section>
+
+        <!-- Bottom footer -->
+        <footer class="page-footer">
+
+            <span>© 2026 PrivateSpace</span>
+            <span>Built for meaningful connections.</span>
+
+        </footer>
+
+    </main>
+
+    <!-- Login functionality -->
+    <script type="module" src="./js/login.js"></script>
+
+</body>
+</html>

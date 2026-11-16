@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PrivateSpace | Account Access</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <main class="page-container">
+
+        <header class="top-header">
+            <a href="./index.html" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Private<span class="brand-light">Space</span></span>
+            </a>
+
+            <span class="private-label">
+                <span class="status-dot"></span>
+                PRIVATE COMMUNITY
+            </span>
+        </header>
+
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <div class="card-decoration"></div>
+
+                <div class="welcome-icon">
+                    <span>✦</span>
+                </div>
+
+                <p class="eyebrow">A PLACE OF YOUR OWN</p>
+
+                <h1 id="pageTitle">Welcome <span>back.</span></h1>
+
+                <p class="subtitle" id="pageSubtitle">
+                    Sign in to enter your private space.
+                    Your conversations belong here.
+                </p>
+
+                <!-- SIGN IN FORM -->
+                <form id="loginForm">
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <div class="password-heading">
+                            <label for="password">Password</label>
+                        </div>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <p id="loginMessage" class="login-message" role="status" aria-live="polite"></p>
+
+                    <button type="submit" id="loginButton">
+                        <span>Enter your space</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                </form>
+
+                <!-- CREATE ACCOUNT FORM -->
+                <form id="signupForm" hidden>
+
+                    <div class="form-group">
+                        <label for="signupName">Your name</label>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            name="name"
+                            placeholder="Enter your name"
+                            autocomplete="name"
+                            maxlength="60"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">Email address</label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword">Create password</label>
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            name="password"
+                            placeholder="At least 8 characters"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+                    </div>
+
+                    <p id="signupMessage" class="login-message" role="status" aria-live="polite"></p>
+
+                    <button type="submit" id="signupButton">
+                        <span>Request access</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                    <p class="signup-note">
+                        Creating an account does not give immediate access.
+                        An administrator must approve your request.
+                    </p>
+
+                </form>
+
+                <!-- SWITCH BETWEEN FORMS -->
+                <div class="auth-switch">
+                    <span id="switchText">New to PrivateSpace?</span>
+
+                    <button type="button" id="switchAuthButton">
+                        Create an account
+                    </button>
+                </div>
+
+                <div class="card-footer">
+                    <span class="footer-line"></span>
+                    <span>INVITATION ONLY</span>
+                    <span class="footer-line"></span>
+                </div>
+
+            </div>
+
+            <p class="bottom-note">
+                A quieter corner of the internet.
+            </p>
+
+        </section>
+
+        <footer class="page-footer">
+            <span>© 2026 PrivateSpace</span>
+            <span>Built for meaningful connections.</span>
+        </footer>
+
+    </main>
+
+    <script type="module" src="./js/login.js"></script>
+
+</body>
+</html>

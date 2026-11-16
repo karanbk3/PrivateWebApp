@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080d1b">
+    <meta name="description" content="Manage your PrivateSpace account, security and privacy settings.">
+
+    <title>Settings | PrivateSpace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/setting.css">
+</head>
+
+<body>
+
+    <!-- =====================================
+         LOADING SCREEN
+    ====================================== -->
+
+    <div id="authLoading" class="loading-screen">
+        <div class="loading-icon"></div>
+        <p>Opening your settings...</p>
+    </div>
+
+
+    <!-- =====================================
+         PROTECTED SETTINGS PAGE
+    ====================================== -->
+
+    <div id="protectedContent" hidden>
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <a href="../main.html" class="brand">
+                <span class="brand-icon">P</span>
+
+                <span>
+                    Private<span class="brand-light">Space</span>
+                </span>
+            </a>
+
+            <nav class="top-navigation">
+
+                <a href="../main.html">Home</a>
+
+                <a href="./discussions.html">Discussions</a>
+
+                <a href="./profile.html">My Profile</a>
+
+                <a href="./setting.html" class="active">Settings</a>
+
+            </nav>
+
+            <div class="header-actions">
+
+                <span class="member-label" id="memberName">
+                    Member
+                </span>
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Sign out
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             MAIN SETTINGS CONTENT
+        ====================================== -->
+
+        <main class="settings-page">
+
+            <!-- PAGE INTRODUCTION -->
+
+            <section class="settings-heading">
+
+                <p class="settings-eyebrow">
+                    YOUR PERSONAL SPACE
+                </p>
+
+                <h1>
+                    Account <span>settings.</span>
+                </h1>
+
+                <p>
+                    Manage your account, security and privacy
+                    preferences in one place.
+                </p>
+
+            </section>
+
+
+            <!-- SETTINGS LAYOUT -->
+
+            <div class="settings-layout">
+
+
+                <!-- =====================================
+                     SETTINGS SIDEBAR
+                ====================================== -->
+
+                <aside class="settings-sidebar">
+
+                    <div class="settings-sidebar-heading">
+                        SETTINGS MENU
+                    </div>
+
+                    <a href="#account" class="settings-nav active">
+                        <span>♙</span>
+                        Account information
+                    </a>
+
+                    <a href="#security" class="settings-nav">
+                        <span>♧</span>
+                        Security
+                    </a>
+
+                    <a href="#privacy" class="settings-nav">
+                        <span>◉</span>
+                        Privacy
+                    </a>
+
+                    <a href="#preferences" class="settings-nav">
+                        <span>⚙</span>
+                        Preferences
+                    </a>
+
+                </aside>
+
+
+                <!-- =====================================
+                     SETTINGS SECTIONS
+                ====================================== -->
+
+                <div class="settings-content">
+
+
+                    <!-- =================================
+                         ACCOUNT INFORMATION
+                    ================================== -->
+
+                    <section class="settings-card" id="account">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <h2>Account information</h2>
+
+                                <p>
+                                    Manage the information shown on your profile.
+                                </p>
+                            </div>
+
+                            <span class="settings-icon">♙</span>
+
+                        </div>
+
+
+                        <!-- Account preview -->
+
+                        <div class="account-preview">
+
+                            <div class="account-avatar" id="settingsAvatar">
+                                P
+                            </div>
+
+                            <div>
+
+                                <h3 id="settingsName">
+                                    Loading name...
+                                </h3>
+
+                                <p id="settingsEmail">
+                                    Loading email...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Account form -->
+
+                        <form id="accountForm">
+
+                            <div class="settings-field">
+
+                                <label for="settingsDisplayName">
+                                    Display name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="settingsDisplayName"
+                                    maxlength="60"
+                                    minlength="2"
+                                    placeholder="Your display name"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label for="settingsBio">
+                                    About you
+                                </label>
+
+                                <textarea
+                                    id="settingsBio"
+                                    maxlength="300"
+                                    rows="4"
+                                    placeholder="Write something about yourself..."
+                                ></textarea>
+
+                                <small>
+                                    Maximum 300 characters.
+                                </small>
+
+                            </div>
+
+
+                            <p
+                                id="accountMessage"
+                                class="settings-message"
+                                aria-live="polite"
+                            ></p>
+
+
+                            <button
+                                type="submit"
+                                id="saveAccountButton"
+                                class="settings-save-button"
+                            >
+                                Save changes
+                            </button>
+
+                        </form>
+
+                    </section>
+
+
+
+                    <!-- =================================
+                         SECURITY
+                    ================================== -->
+
+                    <section class="settings-card" id="security">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <h2>Security</h2>
+
+                                <p>
+                                    Keep your PrivateSpace account secure.
+                                </p>
+                            </div>
+
+                            <span class="settings-icon">♧</span>
+
+                        </div>
+
+
+                        <!-- Password change form -->
+
+                        <form id="passwordForm">
+
+                            <!-- Current password -->
+
+                            <div class="settings-field">
+
+                                <label for="currentPassword">
+                                    Current password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="currentPassword"
+                                    autocomplete="current-password"
+                                    placeholder="Enter your current password"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- New password -->
+
+                            <div class="settings-field">
+
+                                <label for="newPassword">
+                                    New password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="newPassword"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    placeholder="Enter a new password"
+                                    required
+                                >
+
+                                <small>
+                                    Use at least 8 characters.
+                                </small>
+
+                            </div>
+
+
+                            <!-- Confirm password -->
+
+                            <div class="settings-field">
+
+                                <label for="confirmPassword">
+                                    Confirm new password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    placeholder="Enter your new password again"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- Password message -->
+
+                            <p
+                                id="passwordMessage"
+                                class="settings-message"
+                                aria-live="polite"
+                            ></p>
+
+
+                            <!-- Update password button -->
+
+                            <button
+                                type="submit"
+                                id="changePasswordButton"
+                                class="settings-save-button"
+                            >
+                                Update password
+                            </button>
+
+                        </form>
+
+
+                        <!-- Security information -->
+
+                        <div class="privacy-note">
+
+                            <strong>Security reminder</strong>
+
+                            <p>
+                                Never share your password with anyone.
+                                PrivateSpace will never ask you to send
+                                your password through a discussion or message.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================
+                         PRIVACY
+                    ================================== -->
+
+                    <section class="settings-card" id="privacy">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <h2>Privacy</h2>
+
+                                <p>
+                                    Choose what information you share.
+                                </p>
+                            </div>
+
+                            <span class="settings-icon">◉</span>
+
+                        </div>
+
+
+                        <!-- Location preference -->
+
+                        <div class="privacy-setting">
+
+                            <div>
+
+                                <h3>Share my location</h3>
+
+                                <p>
+                                    Allow other members to see your
+                                    province and district.
+                                </p>
+
+                            </div>
+
+
+                            <label class="toggle-switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="showLocation"
+                                >
+
+                                <span class="toggle-slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- Privacy information -->
+
+                        <div class="privacy-note">
+
+                            Your date of birth and email address are not
+                            displayed on your public profile.
+
+                        </div>
+
+
+                        <p
+                            id="privacyMessage"
+                            class="settings-message"
+                            aria-live="polite"
+                        ></p>
+
+
+                        <button
+                            type="button"
+                            id="savePrivacyButton"
+                            class="settings-save-button"
+                        >
+                            Save privacy settings
+                        </button>
+
+                    </section>
+
+
+
+                    <!-- =================================
+                         PREFERENCES
+                    ================================== -->
+
+                    <section class="settings-card" id="preferences">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+                                <h2>Preferences</h2>
+
+                                <p>
+                                    Personalise your PrivateSpace experience.
+                                </p>
+                            </div>
+
+                            <span class="settings-icon">⚙</span>
+
+                        </div>
+
+
+                        <!-- Appearance -->
+
+                        <div class="preference-item">
+
+                            <div>
+
+                                <h3>Interface appearance</h3>
+
+                                <p>
+                                    PrivateSpace currently uses its
+                                    dark appearance.
+                                </p>
+
+                            </div>
+
+                            <span class="preference-status">
+                                Dark mode
+                            </span>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================
+                         ACCOUNT ACTIONS
+                    ================================== -->
+
+                    <section class="settings-card danger-card">
+
+                        <div class="settings-card-heading">
+
+                            <div>
+
+                                <h2>Account actions</h2>
+
+                                <p>
+                                    Manage your current session.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="danger-action">
+
+                            <div>
+
+                                <h3>Sign out of PrivateSpace</h3>
+
+                                <p>
+                                    You will need to sign in again
+                                    to access your account.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                id="settingsLogoutButton"
+                            >
+                                Sign out
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <footer class="settings-footer">
+
+                PrivateSpace · Your privacy matters.
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script type="module" src="../js/setting.js"></script>
+
+</body>
+
+</html>
