@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="Complete your PrivateSpace member profile."
+    >
+
+    <meta name="theme-color" content="#080b18">
+
     <title>Complete Your Profile | PrivateSpace</title>
 
-    <link rel="stylesheet" href="../profile-setup.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Profile Setup CSS -->
+    <link rel="stylesheet" href="./profile-setup.css">
+
 </head>
 
 <body>
@@ -17,70 +35,112 @@
 
         <div class="setup-card">
 
-            <!-- Brand -->
-            <div class="brand">
-                <div class="brand-icon">P</div>
-                <span>Private<span class="brand-light">Space</span></span>
-            </div>
+            <!-- BRAND -->
+            <a
+                href="./index.html"
+                class="brand"
+                aria-label="PrivateSpace home"
+                style="text-decoration: none; color: inherit;"
+            >
 
-            <!-- Introduction -->
-            <div class="setup-heading">
-                <span class="step-label">YOUR FIRST STEP</span>
+                <span class="brand-icon">P</span>
+
+                <span>
+                    Private<span class="brand-light">Space</span>
+                </span>
+
+            </a>
+
+
+            <!-- INTRODUCTION -->
+            <section class="setup-heading">
+
+                <span class="step-label">
+                    YOUR FIRST STEP
+                </span>
 
                 <h1>Let's get to know you.</h1>
 
                 <p>
                     Complete your profile so other community members
-                    can recognize you.
+                    can recognize you and connect with you.
                 </p>
-            </div>
 
-            <form id="profileSetupForm">
+            </section>
 
-                <!-- Profile Photo -->
-                <div class="photo-section">
 
-                    <div class="avatar-preview" id="avatarPreview">
+            <!-- PROFILE SETUP FORM -->
+            <form id="profileSetupForm" novalidate>
+
+                <!-- PROFILE PHOTO -->
+                <section class="photo-section">
+
+                    <div
+                        class="avatar-preview"
+                        id="avatarPreview"
+                        aria-label="Profile photo preview"
+                    >
                         <span>👤</span>
                     </div>
 
                     <div class="photo-details">
-                        <label for="profilePhoto">Profile photo</label>
 
-                        <p>Choose a photo to represent you.</p>
+                        <label for="profilePhoto">
+                            Profile photo
+                        </label>
+
+                        <p>
+                            Choose a photo to represent you.
+                        </p>
 
                         <input
                             type="file"
                             id="profilePhoto"
                             accept="image/jpeg,image/png,image/webp"
+                            aria-describedby="photoHelp"
                         >
+
+                        <small id="photoHelp">
+                            JPG, PNG or WEBP image.
+                        </small>
+
                     </div>
 
-                </div>
+                </section>
 
-                <!-- Full Name -->
+
+                <!-- FULL NAME -->
                 <div class="form-group">
 
-                    <label for="fullName">Your full name</label>
+                    <label for="fullName">
+                        Your full name
+                    </label>
 
                     <input
                         type="text"
                         id="fullName"
-                        placeholder="Enter your name"
+                        name="fullName"
+                        placeholder="Enter your full name"
                         maxlength="60"
+                        autocomplete="name"
                         required
                     >
 
                 </div>
 
-                <!-- Date of Birth -->
+
+                <!-- DATE OF BIRTH -->
                 <div class="form-group">
 
-                    <label for="dateOfBirth">Date of birth</label>
+                    <label for="dateOfBirth">
+                        Date of birth
+                    </label>
 
                     <input
                         type="date"
                         id="dateOfBirth"
+                        name="dateOfBirth"
+                        autocomplete="bday"
                         required
                     >
 
@@ -90,8 +150,9 @@
 
                 </div>
 
-                <!-- Location -->
-                <div class="location-heading">
+
+                <!-- LOCATION SECTION -->
+                <section class="location-heading">
 
                     <h2>Your location</h2>
 
@@ -99,28 +160,49 @@
                         Choose where you currently live in Nepal.
                     </p>
 
-                </div>
+                </section>
 
-                <!-- Province -->
+
+                <!-- PROVINCE -->
                 <div class="form-group">
 
-                    <label for="province">Province</label>
+                    <label for="province">
+                        Province
+                    </label>
 
-                    <select id="province" required>
+                    <select
+                        id="province"
+                        name="province"
+                        required
+                    >
 
-                        <option value="">Select province</option>
+                        <option value="">
+                            Select province
+                        </option>
 
-                        <option value="Koshi">Koshi Province</option>
+                        <option value="Koshi">
+                            Koshi Province
+                        </option>
 
-                        <option value="Madhesh">Madhesh Province</option>
+                        <option value="Madhesh">
+                            Madhesh Province
+                        </option>
 
-                        <option value="Bagmati">Bagmati Province</option>
+                        <option value="Bagmati">
+                            Bagmati Province
+                        </option>
 
-                        <option value="Gandaki">Gandaki Province</option>
+                        <option value="Gandaki">
+                            Gandaki Province
+                        </option>
 
-                        <option value="Lumbini">Lumbini Province</option>
+                        <option value="Lumbini">
+                            Lumbini Province
+                        </option>
 
-                        <option value="Karnali">Karnali Province</option>
+                        <option value="Karnali">
+                            Karnali Province
+                        </option>
 
                         <option value="Sudurpashchim">
                             Sudurpashchim Province
@@ -130,12 +212,20 @@
 
                 </div>
 
-                <!-- District -->
+
+                <!-- DISTRICT -->
                 <div class="form-group">
 
-                    <label for="district">District</label>
+                    <label for="district">
+                        District
+                    </label>
 
-                    <select id="district" required disabled>
+                    <select
+                        id="district"
+                        name="district"
+                        required
+                        disabled
+                    >
 
                         <option value="">
                             Select province first
@@ -143,14 +233,20 @@
 
                     </select>
 
+                    <small>
+                        Select your province first to see its districts.
+                    </small>
+
                 </div>
 
-                <!-- Location Privacy -->
+
+                <!-- LOCATION PRIVACY -->
                 <label class="privacy-option">
 
                     <input
                         type="checkbox"
                         id="showLocation"
+                        name="showLocation"
                     >
 
                     <span>
@@ -159,12 +255,19 @@
 
                 </label>
 
-                <p class="privacy-note">
+
+                <!-- PRIVACY INFORMATION -->
+                <div class="privacy-note">
+
+                    <strong>Privacy matters.</strong>
+
                     Your location is private unless you choose to share it.
                     Your date of birth is always private.
-                </p>
 
-                <!-- Submit -->
+                </div>
+
+
+                <!-- SUBMIT BUTTON -->
                 <button
                     type="submit"
                     id="saveProfileButton"
@@ -172,9 +275,13 @@
                     Complete my profile
                 </button>
 
+
+                <!-- STATUS MESSAGE -->
                 <p
                     id="setupMessage"
                     class="setup-message"
+                    role="status"
+                    aria-live="polite"
                 ></p>
 
             </form>
@@ -183,8 +290,14 @@
 
     </main>
 
-    <script type="module" src="../profile-setup.js"></script>
+
+    <!-- PROFILE SETUP JAVASCRIPT -->
+    <script
+        type="module"
+        src="./profile-setup.js"
+    ></script>
 
 </body>
 
 </html>
+```
