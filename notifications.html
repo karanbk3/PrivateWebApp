@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,42 +6,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="Stay updated with activity and conversations in your PrivateSpace community.">
+    <meta name="theme-color" content="#080d1c">
+
     <title>Notifications | PrivateSpace</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../notifications.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./notifications.css">
 </head>
 
 <body>
 
-    <!-- AUTHENTICATION LOADING -->
+    <!-- ACCOUNT CHECKING SCREEN -->
     <div id="authLoading" class="loading-screen">
         <div class="loading-icon"></div>
         <p>Checking your account...</p>
     </div>
 
 
-    <!-- PROTECTED PAGE -->
+    <!-- PROTECTED CONTENT -->
     <div id="protectedContent" hidden>
 
         <!-- HEADER -->
         <header class="dashboard-header">
 
-            <a href="../main.html" class="brand">
+            <a href="./main.html" class="brand" aria-label="PrivateSpace home">
                 <span class="brand-icon">P</span>
                 <span>Private<span class="brand-light">Space</span></span>
             </a>
 
-            <nav class="top-navigation">
-                <a href="../main.html">Home</a>
+            <nav class="top-navigation" aria-label="Main navigation">
+                <a href="./main.html">Home</a>
                 <a href="./discussions.html">Discussions</a>
                 <a href="./profile.html">My Profile</a>
+                <a href="./notifications.html" aria-current="page">
+                    Notifications
+                </a>
             </nav>
 
             <div class="header-actions">
@@ -50,9 +59,10 @@
                     Member
                 </span>
 
-                <button id="logoutButton"
-                        class="logout-button"
-                        type="button">
+                <button
+                    id="logoutButton"
+                    class="logout-button"
+                    type="button">
                     Sign out
                 </button>
 
@@ -61,9 +71,10 @@
         </header>
 
 
-        <!-- MAIN CONTENT -->
+        <!-- NOTIFICATIONS PAGE -->
         <main class="notifications-page">
 
+            <!-- INTRODUCTION -->
             <section class="notifications-intro">
 
                 <span class="section-eyebrow">
@@ -81,37 +92,49 @@
 
 
             <!-- NOTIFICATION SUMMARY -->
-            <section class="notification-summary">
+            <section class="notification-summary" aria-label="Notification summary">
 
                 <div>
-                    <span class="summary-label">UNREAD NOTIFICATIONS</span>
-                    <h2 id="unreadCount">0</h2>
+                    <span class="summary-label">
+                        UNREAD NOTIFICATIONS
+                    </span>
+
+                    <h2 id="unreadCount" aria-live="polite">
+                        0
+                    </h2>
                 </div>
 
-                <button id="refreshButton"
-                        class="refresh-button"
-                        type="button">
+                <button
+                    id="refreshButton"
+                    class="refresh-button"
+                    type="button">
                     ↻ Refresh
                 </button>
 
             </section>
 
 
-            <!-- NOTIFICATION LIST -->
+            <!-- RECENT ACTIVITY -->
             <section class="notification-section">
 
                 <div class="notification-section-heading">
+
                     <h2>Recent activity</h2>
 
-                    <button id="markAllReadButton"
-                            class="mark-all-button"
-                            type="button">
+                    <button
+                        id="markAllReadButton"
+                        class="mark-all-button"
+                        type="button">
                         Mark all as read
                     </button>
+
                 </div>
 
-                <div id="notificationList"
-                     class="notification-list">
+                <!-- JavaScript displays notifications here -->
+                <div
+                    id="notificationList"
+                    class="notification-list"
+                    aria-live="polite">
 
                     <div class="notification-empty">
                         Loading notifications...
@@ -119,12 +142,18 @@
 
                 </div>
 
-                <p id="notificationMessage"
-                   class="notification-message"></p>
+                <!-- Status and error messages -->
+                <p
+                    id="notificationMessage"
+                    class="notification-message"
+                    role="status"
+                    aria-live="polite">
+                </p>
 
             </section>
 
 
+            <!-- FOOTER -->
             <footer class="notifications-footer">
                 PrivateSpace · Stay connected with your community.
             </footer>
@@ -134,8 +163,9 @@
     </div>
 
 
-    <script type="module"
-            src="../notifications.js"></script>
+    <!-- PAGE JAVASCRIPT -->
+    <script type="module" src="./notifications.js"></script>
 
 </body>
 </html>
+```
