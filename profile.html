@@ -1,4 +1,5 @@
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,34 +9,39 @@
 
     <title>My Profile | PrivateSpace</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../profile.css">
+    <!-- Profile CSS -->
+    <link rel="stylesheet" href="./profile.css">
 </head>
 
 <body>
 
+    <!-- Header -->
     <header class="topbar">
 
-        <a href="../main.html" class="brand">PrivateSpace</a>
+        <a href="./main.html" class="brand">PrivateSpace</a>
 
         <nav class="navigation">
 
-            <a href="../main.html">Home</a>
+            <a href="./main.html">Home</a>
 
             <a href="./discussions.html">Discussions</a>
 
             <a href="./profile.html" class="active">My Profile</a>
 
-            <!-- Only visible to an approved admin -->
-            <a href="./admin.html"
-               id="adminDashboardLink"
-               class="admin-dashboard-link"
-               hidden>
+            <!-- Visible only to approved administrators -->
+            <a
+                href="./admin.html"
+                id="adminDashboardLink"
+                class="admin-dashboard-link"
+                hidden>
                 <span>⚙</span> Admin Dashboard
             </a>
 
@@ -47,7 +53,10 @@
                 Settings
             </a>
 
-            <button type="button" id="logoutButton" class="logout-button">
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button">
                 Sign out
             </button>
 
@@ -56,23 +65,33 @@
     </header>
 
 
+    <!-- Main Content -->
     <main class="page-container">
 
+        <!-- Loading Message -->
         <div id="profileLoading" class="loading-message">
             Loading your profile...
         </div>
 
-        <div id="profileError" class="error-message" hidden></div>
+        <!-- Error Message -->
+        <div
+            id="profileError"
+            class="error-message"
+            hidden>
+        </div>
 
 
+        <!-- Profile Content -->
         <div id="profileContent" hidden>
 
+            <!-- Profile Cover -->
             <section class="profile-cover">
 
                 <div class="cover-decoration"></div>
 
                 <div class="profile-heading">
 
+                    <!-- Profile Picture -->
                     <div class="avatar-wrapper">
 
                         <img
@@ -81,10 +100,11 @@
                             src=""
                             alt="Profile picture"
                             draggable="false"
-                            hidden
-                        >
+                            hidden>
 
-                        <div id="avatarFallback" class="avatar-fallback">
+                        <div
+                            id="avatarFallback"
+                            class="avatar-fallback">
                             ?
                         </div>
 
@@ -100,12 +120,12 @@
                             type="file"
                             id="profilePhotoInput"
                             accept="image/jpeg,image/png,image/webp"
-                            hidden
-                        >
+                            hidden>
 
                     </div>
 
 
+                    <!-- Member Information -->
                     <div class="profile-heading-info">
 
                         <h1 id="profileName">Member Name</h1>
@@ -123,6 +143,7 @@
             </section>
 
 
+            <!-- About Me -->
             <section class="information-card">
 
                 <div class="card-heading">
@@ -141,6 +162,8 @@
 
                 <div class="information-divider"></div>
 
+
+                <!-- Profile Details -->
                 <div class="profile-details">
 
                     <div class="detail-item">
@@ -155,7 +178,9 @@
                     </div>
 
 
-                    <div class="detail-item" id="locationDetail">
+                    <div
+                        class="detail-item"
+                        id="locationDetail">
 
                         <span class="detail-icon">📍</span>
 
@@ -180,6 +205,7 @@
 
                 </div>
 
+
                 <p id="privateInformationNote" class="privacy-note">
                     Your date of birth and email are private.
                 </p>
@@ -187,15 +213,21 @@
             </section>
 
 
-            <section id="createDiscussionSection" class="composer-card">
+            <!-- Create Discussion -->
+            <section
+                id="createDiscussionSection"
+                class="composer-card">
 
                 <div class="composer-heading">
 
                     <h2>Create a discussion</h2>
 
-                    <p>Share something with your community.</p>
+                    <p>
+                        Share something with your community.
+                    </p>
 
                 </div>
+
 
                 <form id="newDiscussionForm">
 
@@ -206,30 +238,42 @@
                         placeholder="What's on your mind?"
                         required></textarea>
 
+
                     <div class="composer-bottom">
 
-                        <span>Share your thoughts respectfully.</span>
+                        <span>
+                            Share your thoughts respectfully.
+                        </span>
 
-                        <button type="submit" id="newDiscussionButton">
+                        <button
+                            type="submit"
+                            id="newDiscussionButton">
                             Publish
                         </button>
 
                     </div>
 
-                    <p id="newDiscussionMessage" class="form-message"></p>
+
+                    <p
+                        id="newDiscussionMessage"
+                        class="form-message">
+                    </p>
 
                 </form>
 
             </section>
 
 
+            <!-- Member Discussions -->
             <section class="timeline-section">
 
                 <div class="timeline-heading">
 
                     <div>
 
-                        <h2 id="timelineTitle">My Discussions</h2>
+                        <h2 id="timelineTitle">
+                            My Discussions
+                        </h2>
 
                         <p>
                             Posts shared with the PrivateSpace community.
@@ -237,13 +281,20 @@
 
                     </div>
 
-                    <span id="postCount" class="post-count">
+                    <span
+                        id="postCount"
+                        class="post-count">
                         0 discussions
                     </span>
 
                 </div>
 
-                <div id="memberPosts" class="post-list"></div>
+
+                <!-- Posts will be added using JavaScript -->
+                <div
+                    id="memberPosts"
+                    class="post-list">
+                </div>
 
             </section>
 
@@ -252,7 +303,9 @@
     </main>
 
 
-    <script type="module" src="../profile.js"></script>
+    <!-- Profile JavaScript -->
+    <script type="module" src="./profile.js"></script>
 
 </body>
 </html>
+```
