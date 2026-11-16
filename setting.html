@@ -1,4 +1,5 @@
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,46 +16,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../setting.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./setting.css">
 </head>
 
 <body>
 
-    <!-- =====================================
-         LOADING SCREEN
-    ====================================== -->
-
+    <!-- Loading Screen -->
     <div id="authLoading" class="loading-screen">
         <div class="loading-icon"></div>
         <p>Opening your settings...</p>
     </div>
 
 
-    <!-- =====================================
-         PROTECTED SETTINGS PAGE
-    ====================================== -->
-
+    <!-- Protected Settings Page -->
     <div id="protectedContent" hidden>
 
-        <!-- HEADER -->
-
+        <!-- Header -->
         <header class="dashboard-header">
 
-            <a href="../main.html" class="brand">
+            <a href="./main.html" class="brand">
+
                 <span class="brand-icon">P</span>
 
                 <span>
                     Private<span class="brand-light">Space</span>
                 </span>
+
             </a>
 
+
+            <!-- Navigation -->
             <nav class="top-navigation">
 
-                <a href="../main.html">Home</a>
+                <a href="./main.html">Home</a>
 
                 <a href="./discussions.html">Discussions</a>
 
@@ -64,6 +64,8 @@
 
             </nav>
 
+
+            <!-- Header Actions -->
             <div class="header-actions">
 
                 <span class="member-label" id="memberName">
@@ -73,8 +75,7 @@
                 <button
                     type="button"
                     id="logoutButton"
-                    class="logout-button"
-                >
+                    class="logout-button">
                     Sign out
                 </button>
 
@@ -83,14 +84,10 @@
         </header>
 
 
-        <!-- =====================================
-             MAIN SETTINGS CONTENT
-        ====================================== -->
-
+        <!-- Main Settings Content -->
         <main class="settings-page">
 
-            <!-- PAGE INTRODUCTION -->
-
+            <!-- Page Introduction -->
             <section class="settings-heading">
 
                 <p class="settings-eyebrow">
@@ -109,15 +106,11 @@
             </section>
 
 
-            <!-- SETTINGS LAYOUT -->
-
+            <!-- Settings Layout -->
             <div class="settings-layout">
 
 
-                <!-- =====================================
-                     SETTINGS SIDEBAR
-                ====================================== -->
-
+                <!-- Settings Sidebar -->
                 <aside class="settings-sidebar">
 
                     <div class="settings-sidebar-heading">
@@ -147,17 +140,11 @@
                 </aside>
 
 
-                <!-- =====================================
-                     SETTINGS SECTIONS
-                ====================================== -->
-
+                <!-- Settings Content -->
                 <div class="settings-content">
 
 
-                    <!-- =================================
-                         ACCOUNT INFORMATION
-                    ================================== -->
-
+                    <!-- ACCOUNT INFORMATION -->
                     <section class="settings-card" id="account">
 
                         <div class="settings-card-heading">
@@ -175,11 +162,12 @@
                         </div>
 
 
-                        <!-- Account preview -->
-
+                        <!-- Account Preview -->
                         <div class="account-preview">
 
-                            <div class="account-avatar" id="settingsAvatar">
+                            <div
+                                class="account-avatar"
+                                id="settingsAvatar">
                                 P
                             </div>
 
@@ -198,8 +186,7 @@
                         </div>
 
 
-                        <!-- Account form -->
-
+                        <!-- Account Form -->
                         <form id="accountForm">
 
                             <div class="settings-field">
@@ -215,8 +202,7 @@
                                     minlength="2"
                                     placeholder="Your display name"
                                     autocomplete="name"
-                                    required
-                                >
+                                    required>
 
                             </div>
 
@@ -231,8 +217,7 @@
                                     id="settingsBio"
                                     maxlength="300"
                                     rows="4"
-                                    placeholder="Write something about yourself..."
-                                ></textarea>
+                                    placeholder="Write something about yourself..."></textarea>
 
                                 <small>
                                     Maximum 300 characters.
@@ -244,15 +229,14 @@
                             <p
                                 id="accountMessage"
                                 class="settings-message"
-                                aria-live="polite"
-                            ></p>
+                                aria-live="polite">
+                            </p>
 
 
                             <button
                                 type="submit"
                                 id="saveAccountButton"
-                                class="settings-save-button"
-                            >
+                                class="settings-save-button">
                                 Save changes
                             </button>
 
@@ -262,10 +246,7 @@
 
 
 
-                    <!-- =================================
-                         SECURITY
-                    ================================== -->
-
+                    <!-- SECURITY -->
                     <section class="settings-card" id="security">
 
                         <div class="settings-card-heading">
@@ -283,11 +264,8 @@
                         </div>
 
 
-                        <!-- Password change form -->
-
+                        <!-- Password Change Form -->
                         <form id="passwordForm">
-
-                            <!-- Current password -->
 
                             <div class="settings-field">
 
@@ -300,13 +278,10 @@
                                     id="currentPassword"
                                     autocomplete="current-password"
                                     placeholder="Enter your current password"
-                                    required
-                                >
+                                    required>
 
                             </div>
 
-
-                            <!-- New password -->
 
                             <div class="settings-field">
 
@@ -320,8 +295,7 @@
                                     minlength="8"
                                     autocomplete="new-password"
                                     placeholder="Enter a new password"
-                                    required
-                                >
+                                    required>
 
                                 <small>
                                     Use at least 8 characters.
@@ -329,8 +303,6 @@
 
                             </div>
 
-
-                            <!-- Confirm password -->
 
                             <div class="settings-field">
 
@@ -344,36 +316,29 @@
                                     minlength="8"
                                     autocomplete="new-password"
                                     placeholder="Enter your new password again"
-                                    required
-                                >
+                                    required>
 
                             </div>
 
 
-                            <!-- Password message -->
-
                             <p
                                 id="passwordMessage"
                                 class="settings-message"
-                                aria-live="polite"
-                            ></p>
+                                aria-live="polite">
+                            </p>
 
-
-                            <!-- Update password button -->
 
                             <button
                                 type="submit"
                                 id="changePasswordButton"
-                                class="settings-save-button"
-                            >
+                                class="settings-save-button">
                                 Update password
                             </button>
 
                         </form>
 
 
-                        <!-- Security information -->
-
+                        <!-- Security Information -->
                         <div class="privacy-note">
 
                             <strong>Security reminder</strong>
@@ -390,10 +355,7 @@
 
 
 
-                    <!-- =================================
-                         PRIVACY
-                    ================================== -->
-
+                    <!-- PRIVACY -->
                     <section class="settings-card" id="privacy">
 
                         <div class="settings-card-heading">
@@ -411,8 +373,7 @@
                         </div>
 
 
-                        <!-- Location preference -->
-
+                        <!-- Location Preference -->
                         <div class="privacy-setting">
 
                             <div>
@@ -432,7 +393,7 @@
                                 <input
                                     type="checkbox"
                                     id="showLocation"
-                                >
+                                    aria-label="Share my location">
 
                                 <span class="toggle-slider"></span>
 
@@ -441,8 +402,7 @@
                         </div>
 
 
-                        <!-- Privacy information -->
-
+                        <!-- Privacy Information -->
                         <div class="privacy-note">
 
                             Your date of birth and email address are not
@@ -454,15 +414,14 @@
                         <p
                             id="privacyMessage"
                             class="settings-message"
-                            aria-live="polite"
-                        ></p>
+                            aria-live="polite">
+                        </p>
 
 
                         <button
                             type="button"
                             id="savePrivacyButton"
-                            class="settings-save-button"
-                        >
+                            class="settings-save-button">
                             Save privacy settings
                         </button>
 
@@ -470,10 +429,7 @@
 
 
 
-                    <!-- =================================
-                         PREFERENCES
-                    ================================== -->
-
+                    <!-- PREFERENCES -->
                     <section class="settings-card" id="preferences">
 
                         <div class="settings-card-heading">
@@ -492,7 +448,6 @@
 
 
                         <!-- Appearance -->
-
                         <div class="preference-item">
 
                             <div>
@@ -516,22 +471,17 @@
 
 
 
-                    <!-- =================================
-                         ACCOUNT ACTIONS
-                    ================================== -->
-
+                    <!-- ACCOUNT ACTIONS -->
                     <section class="settings-card danger-card">
 
                         <div class="settings-card-heading">
 
                             <div>
-
                                 <h2>Account actions</h2>
 
                                 <p>
                                     Manage your current session.
                                 </p>
-
                             </div>
 
                         </div>
@@ -553,8 +503,7 @@
 
                             <button
                                 type="button"
-                                id="settingsLogoutButton"
-                            >
+                                id="settingsLogoutButton">
                                 Sign out
                             </button>
 
@@ -568,12 +517,9 @@
             </div>
 
 
-            <!-- FOOTER -->
-
+            <!-- Footer -->
             <footer class="settings-footer">
-
                 PrivateSpace · Your privacy matters.
-
             </footer>
 
         </main>
@@ -581,12 +527,9 @@
     </div>
 
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
-
-    <script type="module" src="../setting.js"></script>
+    <!-- Settings JavaScript -->
+    <script type="module" src="./setting.js"></script>
 
 </body>
-
 </html>
+```
