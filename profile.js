@@ -1,4 +1,5 @@
 
+```javascript
 import { supabase } from "./supabase.js";
 
 // ==========================================
@@ -40,8 +41,6 @@ const postCount = $("postCount");
 const timelineTitle = $("timelineTitle");
 
 const logoutButton = $("logoutButton");
-
-// NEW: Admin Dashboard navigation link
 const adminDashboardLink = $("adminDashboardLink");
 
 
@@ -56,6 +55,11 @@ let currentUser = null;
 let profileOwnerId = null;
 let isOwnProfile = false;
 let currentProfile = null;
+let originalPhotoButtonContent = "";
+
+if (changePhotoButton) {
+    originalPhotoButtonContent = changePhotoButton.innerHTML;
+}
 
 
 // ==========================================
@@ -65,24 +69,34 @@ let currentProfile = null;
 function formatTime(value) {
     const date = new Date(value);
 
+    if (Number.isNaN(date.getTime())) {
+        return "Recently";
+    }
+
     const seconds = Math.floor(
         (Date.now() - date.getTime()) / 1000
     );
 
-    if (!Number.isFinite(seconds) || seconds < 0) {
-        return "Just now";
-    }
-
+    if (seconds < 0) return "Just now";
     if (seconds < 60) return "Just now";
 
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
+
+    if (minutes < 60) {
+        return `${minutes}m ago`;
+    }
 
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
+
+    if (hours < 24) {
+        return `${hours}h ago`;
+    }
 
     const days = Math.floor(hours / 24);
-    if (days < 7) return `${days}d ago`;
+
+    if (days < 7) {
+        return `${days}d ago`;
+    }
 
     return date.toLocaleDateString();
 }
@@ -92,7 +106,7 @@ function formatTime(value) {
 // 4. DISPLAY PROFILE PHOTO
 // ==========================================
 
-function showProfilePhoto(photoUrl, name) {
+function showProfilePhoto(photoUrl, name = "Member") {
     const letter = name.trim().charAt(0).toUpperCase() || "?";
 
     avatarFallback.textContent = letter;
@@ -129,6 +143,7 @@ function createPostCard(post, name, photoUrl) {
     const top = document.createElement("div");
     top.className = "post-top";
 
+    // Profile picture
     if (photoUrl) {
         const image = document.createElement("img");
 
@@ -159,6 +174,7 @@ function createPostCard(post, name, photoUrl) {
         top.appendChild(fallback);
     }
 
+    // Author information
     const authorDetails = document.createElement("div");
 
     const author = document.createElement("p");
@@ -170,12 +186,13 @@ function createPostCard(post, name, photoUrl) {
     time.textContent = formatTime(post.created_at);
 
     authorDetails.append(author, time);
-    top.appendChild(authorDetails);
 
+    // Post content
     const content = document.createElement("p");
     content.className = "post-content";
-    content.textContent = post.content;
+    content.textContent = post.content || "";
 
+    top.appendChild(authorDetails);
     card.append(top, content);
 
     return card;
@@ -216,9 +233,13 @@ async function loadProfilePosts(name, photoUrl) {
     }
 
     posts.forEach((post) => {
-        memberPosts.appendChild(
-            createPostCard(post, name, photoUrl)
+        const postCard = createPostCard(
+            post,
+            name,
+            photoUrl
         );
+
+        memberPosts.appendChild(postCard);
     });
 }
 
@@ -229,35 +250,40 @@ async function loadProfilePosts(name, photoUrl) {
 
 async function loadProfile() {
     try {
-        // Check signed-in user.
-        const { data: authData, error: authError } =
-            await supabase.auth.getUser();
+        // Check whether the visitor is signed in.
+        const {
+            data: authData,
+            error: authError
+        } = await supabase.auth.getUser();
 
         if (authError || !authData.user) {
-            window.location.href = "../login.html";
+            window.location.href = "./login.html";
             return;
         }
 
         currentUser = authData.user;
 
-        // Check the signed-in user's role and approval.
-        const { data: viewer, error: viewerError } =
-            await supabase
-                .from("profiles")
-                .select("role, approval_status")
-                .eq("id", currentUser.id)
-                .single();
+        // Check the visitor's approval and role.
+        const {
+            data: viewer,
+            error: viewerError
+        } = await supabase
+            .from("profiles")
+            .select("role, approval_status")
+            .eq("id", currentUser.id)
+            .single();
 
         if (
             viewerError ||
-            viewer?.approval_status !== "approved"
+            !viewer ||
+            viewer.approval_status !== "approved"
         ) {
             await supabase.auth.signOut();
-            window.location.href = "../login.html";
+            window.location.href = "./login.html";
             return;
         }
 
-        // SHOW ADMIN DASHBOARD ONLY TO APPROVED ADMINS.
+        // Show the admin link only to approved admins.
         if (adminDashboardLink) {
             const isApprovedAdmin =
                 viewer.role === "admin" &&
@@ -266,22 +292,25 @@ async function loadProfile() {
             adminDashboardLink.hidden = !isApprovedAdmin;
         }
 
-        // Select whose profile to display.
+        // Decide whose profile should be displayed.
         profileOwnerId = requestedMemberId || currentUser.id;
+
         isOwnProfile = profileOwnerId === currentUser.id;
 
         // Load public profile information.
-        const { data: profile, error: profileError } =
-            await supabase
-                .from("profiles")
-                .select(
-                    "id, display_name, role, bio, avatar_url, approval_status"
-                )
-                .eq("id", profileOwnerId)
-                .single();
+        const {
+            data: profile,
+            error: publicProfileError
+        } = await supabase
+            .from("profiles")
+            .select(
+                "id, display_name, role, bio, avatar_url, approval_status"
+            )
+            .eq("id", profileOwnerId)
+            .single();
 
         if (
-            profileError ||
+            publicProfileError ||
             !profile ||
             profile.approval_status !== "approved"
         ) {
@@ -290,24 +319,26 @@ async function loadProfile() {
 
         currentProfile = profile;
 
-        const name = profile.display_name || "PrivateSpace Member";
+        const name =
+            profile.display_name || "PrivateSpace Member";
+
         const photoUrl = profile.avatar_url || "";
 
         // Display public information.
         profileName.textContent = name;
-        profileRole.textContent = profile.role || "member";
+        profileRole.textContent = profile.role || "Member";
 
         profileBio.textContent =
             profile.bio?.trim() || "No biography added yet.";
 
         detailName.textContent = name;
-        detailRole.textContent = profile.role || "member";
+        detailRole.textContent = profile.role || "Member";
 
         showProfilePhoto(photoUrl, name);
 
 
         // ==================================
-        // OWNER'S PROFILE
+        //  YOUR OWN PROFILE
         // ==================================
 
         if (isOwnProfile) {
@@ -320,25 +351,34 @@ async function loadProfile() {
 
             avatarWrapper?.classList.remove("view-only");
 
-            // Load only the owner's private details.
-            const { data: privateDetails, error: privateError } =
-                await supabase
-                    .from("private_profile_details")
-                    .select("province, district, profile_completed")
-                    .eq("user_id", currentUser.id)
-                    .maybeSingle();
+            // Load private information only for the account owner.
+            const {
+                data: privateDetails,
+                error: privateError
+            } = await supabase
+                .from("private_profile_details")
+                .select(
+                    "province, district, profile_completed"
+                )
+                .eq("user_id", currentUser.id)
+                .maybeSingle();
 
             if (privateError) throw privateError;
 
+            // Send the owner to profile setup if not completed.
             if (!privateDetails?.profile_completed) {
                 window.location.href = "./profile-setup.html";
                 return;
             }
 
-            detailLocation.textContent = [
+            const location = [
                 privateDetails.province,
                 privateDetails.district
-            ].filter(Boolean).join(" · ") || "Not added";
+            ]
+                .filter(Boolean)
+                .join(" · ");
+
+            detailLocation.textContent = location || "Not added";
 
             locationDetail.hidden = false;
 
@@ -348,7 +388,7 @@ async function loadProfile() {
 
 
         // ==================================
-        // ANOTHER MEMBER'S PROFILE
+        //  ANOTHER MEMBER'S PROFILE
         // ==================================
 
         else {
@@ -367,8 +407,11 @@ async function loadProfile() {
                 "Private account information is not displayed.";
         }
 
+
+        // Load discussions.
         await loadProfilePosts(name, photoUrl);
 
+        // Display the completed page.
         profileLoading.hidden = true;
         profileContent.hidden = false;
 
@@ -390,10 +433,18 @@ async function loadProfile() {
 // ==========================================
 
 if (changePhotoButton && profilePhotoInput) {
-    changePhotoButton.addEventListener("click", () => {
-        if (isOwnProfile) {
-            profilePhotoInput.click();
+    changePhotoButton.addEventListener("click", (event) => {
+        if (!isOwnProfile) {
+            event.preventDefault();
+            return;
         }
+
+        if (changePhotoButton.dataset.uploading === "true") {
+            event.preventDefault();
+            return;
+        }
+
+        profilePhotoInput.click();
     });
 }
 
@@ -410,6 +461,7 @@ if (profilePhotoInput) {
             return;
         }
 
+        // Allowed image formats.
         const allowedTypes = [
             "image/jpeg",
             "image/png",
@@ -422,14 +474,16 @@ if (profilePhotoInput) {
             return;
         }
 
+        // Maximum image size: 1 MB.
         if (selectedPhoto.size > 1024 * 1024) {
             alert("Your photo must be smaller than 1 MB.");
             profilePhotoInput.value = "";
             return;
         }
 
-        changePhotoButton.disabled = true;
-        changePhotoButton.textContent = "Uploading...";
+        changePhotoButton.dataset.uploading = "true";
+        changePhotoButton.style.pointerEvents = "none";
+        changePhotoButton.innerHTML = "Uploading...";
 
         try {
             const extension = {
@@ -438,26 +492,36 @@ if (profilePhotoInput) {
                 "image/webp": "webp"
             }[selectedPhoto.type];
 
+            // Use a predictable file location for this user.
             const filePath =
                 `${currentUser.id}/profile-photo.${extension}`;
 
-            const { data, error } = await supabase.storage
+            // Upload or replace the existing photo.
+            const {
+                error: uploadError
+            } = await supabase.storage
                 .from("avatars")
                 .upload(filePath, selectedPhoto, {
                     upsert: true,
                     contentType: selectedPhoto.type
                 });
 
-            if (error) throw error;
+            if (uploadError) throw uploadError;
 
-            const { data: imageData } = supabase.storage
+            // Get the public image address.
+            const {
+                data: imageData
+            } = supabase.storage
                 .from("avatars")
                 .getPublicUrl(filePath);
 
             const photoUrl =
                 `${imageData.publicUrl}?updated=${Date.now()}`;
 
-            const { error: updateError } = await supabase
+            // Save the new image address in the profile.
+            const {
+                error: updateError
+            } = await supabase
                 .from("profiles")
                 .update({
                     avatar_url: photoUrl
@@ -466,6 +530,7 @@ if (profilePhotoInput) {
 
             if (updateError) throw updateError;
 
+            // Update the current page.
             currentProfile.avatar_url = photoUrl;
 
             showProfilePhoto(
@@ -473,6 +538,7 @@ if (profilePhotoInput) {
                 currentProfile.display_name || "Member"
             );
 
+            // Update the profile pictures on discussion cards.
             await loadProfilePosts(
                 currentProfile.display_name || "Member",
                 photoUrl
@@ -489,8 +555,9 @@ if (profilePhotoInput) {
             );
 
         } finally {
-            changePhotoButton.disabled = false;
-            changePhotoButton.textContent = "Change photo";
+            changePhotoButton.dataset.uploading = "false";
+            changePhotoButton.style.pointerEvents = "";
+            changePhotoButton.innerHTML = originalPhotoButtonContent;
 
             profilePhotoInput.value = "";
         }
@@ -506,7 +573,9 @@ if (newDiscussionForm) {
     newDiscussionForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        if (!isOwnProfile || !currentUser) return;
+        if (!isOwnProfile || !currentUser) {
+            return;
+        }
 
         const content = newDiscussionContent.value.trim();
 
@@ -518,10 +587,14 @@ if (newDiscussionForm) {
 
         newDiscussionButton.disabled = true;
         newDiscussionButton.textContent = "Publishing...";
+
         newDiscussionMessage.textContent = "";
 
         try {
-            const { error } = await supabase
+            // Save the discussion in Supabase.
+            const {
+                error
+            } = await supabase
                 .from("posts")
                 .insert({
                     author_id: currentUser.id,
@@ -530,11 +603,13 @@ if (newDiscussionForm) {
 
             if (error) throw error;
 
+            // Clear the writing area.
             newDiscussionContent.value = "";
 
             newDiscussionMessage.textContent =
                 "Your discussion has been published!";
 
+            // Refresh the discussion list.
             await loadProfilePosts(
                 currentProfile.display_name || "Member",
                 currentProfile.avatar_url || ""
@@ -544,6 +619,7 @@ if (newDiscussionForm) {
             console.error("Publishing error:", error);
 
             newDiscussionMessage.textContent =
+                error.message ||
                 "Could not publish. Please try again.";
 
         } finally {
@@ -562,23 +638,27 @@ if (logoutButton) {
     logoutButton.addEventListener("click", async () => {
         logoutButton.disabled = true;
 
-        const { error } = await supabase.auth.signOut();
+        try {
+            const { error } = await supabase.auth.signOut();
 
-        if (error) {
+            if (error) throw error;
+
+            window.location.href = "./login.html";
+
+        } catch (error) {
             console.error("Sign out error:", error);
 
             logoutButton.disabled = false;
-            alert("Unable to sign out. Please try again.");
-            return;
-        }
 
-        window.location.href = "../login.html";
+            alert("Unable to sign out. Please try again.");
+        }
     });
 }
 
 
 // ==========================================
-// 12. START PROFILE
+// 12. START PROFILE PAGE
 // ==========================================
 
 loadProfile();
+```
