@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,50 +6,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="PrivateSpace is a private community for meaningful conversations, sharing ideas, and connecting with approved members.">
+
+    <meta name="theme-color" content="#080b18">
+
     <title>PrivateSpace | A Place of Your Own</title>
 
-    <!-- Website font -->
+    <!-- Website fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
-    <!-- Main website design -->
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-    <!-- Background lighting -->
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
+    <!-- Background lighting effects -->
+    <div class="background-glow glow-one" aria-hidden="true"></div>
+    <div class="background-glow glow-two" aria-hidden="true"></div>
 
-    <!-- Main website container -->
     <div class="page-container">
 
-        <!-- Navigation -->
+        <!-- ================= HEADER ================= -->
+
         <header class="top-header">
 
-            <a href="./index.html" class="brand">
+            <a href="./index.html" class="brand" aria-label="PrivateSpace home">
                 <span class="brand-icon">P</span>
-                <span>Private<span class="brand-light">Space</span></span>
+
+                <span>
+                    Private<span class="brand-light">Space</span>
+                </span>
             </a>
 
-            <nav class="navigation">
+            <nav class="navigation" aria-label="Main navigation">
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
                 <a href="#community">Community</a>
             </nav>
 
             <a href="./login.html" class="header-button">
-                Sign In <span>→</span>
+                Sign In <span aria-hidden="true">→</span>
             </a>
 
         </header>
 
 
-        <!-- Welcome section -->
+        <!-- ================= MAIN CONTENT ================= -->
+
         <main>
+
+            <!-- HERO SECTION -->
 
             <section class="hero-section">
 
@@ -78,7 +90,7 @@
 
                         <a href="./login.html" class="primary-button">
                             Enter Your Space
-                            <span>→</span>
+                            <span aria-hidden="true">→</span>
                         </a>
 
                         <a href="#about" class="secondary-button">
@@ -88,7 +100,7 @@
                     </div>
 
                     <div class="hero-note">
-                        <span>✦</span>
+                        <span aria-hidden="true">✦</span>
                         No public profiles. No open registration.
                         Just an approved community.
                     </div>
@@ -96,21 +108,25 @@
                 </div>
 
 
-                <!-- Decorative preview card -->
-                <div class="hero-visual">
+                <!-- Decorative preview -->
 
-                    <div class="visual-glow"></div>
+                <div class="hero-visual" aria-label="PrivateSpace community preview">
+
+                    <div class="visual-glow" aria-hidden="true"></div>
 
                     <div class="preview-card">
 
                         <div class="preview-top">
 
                             <div class="preview-brand">
+
                                 <span class="preview-icon">P</span>
+
                                 <div>
                                     <strong>PrivateSpace</strong>
                                     <small>YOUR COMMUNITY</small>
                                 </div>
+
                             </div>
 
                             <span class="online-indicator">
@@ -118,6 +134,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="preview-content">
 
@@ -139,6 +156,7 @@
 
                         </div>
 
+
                         <div class="preview-footer">
                             <span>PRIVATE COMMUNITY</span>
                             <span>EST. 2026</span>
@@ -146,8 +164,9 @@
 
                     </div>
 
+
                     <div class="floating-card">
-                        <span>✧</span>
+                        <span aria-hidden="true">✧</span>
                         A space that feels like yours.
                     </div>
 
@@ -156,12 +175,15 @@
             </section>
 
 
-            <!-- About section -->
+            <!-- ABOUT SECTION -->
+
             <section class="about-section" id="about">
 
                 <div class="section-heading">
 
-                    <span class="section-label">WHY PRIVATESPACE?</span>
+                    <span class="section-label">
+                        WHY PRIVATESPACE?
+                    </span>
 
                     <h2>
                         More than a website.
@@ -179,26 +201,27 @@
             </section>
 
 
-            <!-- Features section -->
+            <!-- FEATURES SECTION -->
+
             <section class="features-section" id="features">
 
-                <div class="feature-card">
+                <article class="feature-card">
 
-                    <div class="feature-icon">✦</div>
+                    <div class="feature-icon" aria-hidden="true">✦</div>
 
                     <h3>Share Your Thoughts</h3>
 
                     <p>
-                        Express your ideas, feelings, experiences,
+                        Express your ideas, experiences,
                         and perspectives with other members.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="feature-card">
+                <article class="feature-card">
 
-                    <div class="feature-icon">◇</div>
+                    <div class="feature-icon" aria-hidden="true">◇</div>
 
                     <h3>Meaningful Discussions</h3>
 
@@ -207,12 +230,12 @@
                         and take part in conversations.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="feature-card">
+                <article class="feature-card">
 
-                    <div class="feature-icon">◎</div>
+                    <div class="feature-icon" aria-hidden="true">◎</div>
 
                     <h3>Member Community</h3>
 
@@ -221,12 +244,13 @@
                         dedicated community.
                     </p>
 
-                </div>
+                </article>
 
             </section>
 
 
-            <!-- Community section -->
+            <!-- COMMUNITY SECTION -->
+
             <section class="community-section" id="community">
 
                 <div class="community-content">
@@ -247,7 +271,7 @@
 
                     <a href="./login.html" class="primary-button">
                         Sign In to Continue
-                        <span>→</span>
+                        <span aria-hidden="true">→</span>
                     </a>
 
                 </div>
@@ -257,12 +281,18 @@
         </main>
 
 
-        <!-- Footer -->
+        <!-- ================= FOOTER ================= -->
+
         <footer class="page-footer">
 
-            <a href="./index.html" class="brand">
+            <a href="./index.html" class="brand" aria-label="PrivateSpace home">
+
                 <span class="brand-icon">P</span>
-                <span>Private<span class="brand-light">Space</span></span>
+
+                <span>
+                    Private<span class="brand-light">Space</span>
+                </span>
+
             </a>
 
             <p>
@@ -279,3 +309,4 @@
 
 </body>
 </html>
+```
