@@ -1,7 +1,10 @@
-
-/* =========================================
-   PRIVATESPACE - NOTIFICATIONS
-========================================= */
+```css
+/*
+==================================================
+    PRIVATESPACE - NOTIFICATIONS
+    RESPONSIVE DESIGN
+==================================================
+*/
 
 :root {
     --notification-bg: #090d19;
@@ -11,6 +14,19 @@
     --notification-muted: #929bb3;
     --notification-purple: #9b8cff;
     --notification-cyan: #75d9e8;
+}
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
 }
 
 [hidden] {
@@ -25,11 +41,26 @@ body {
         var(--notification-bg);
     color: var(--notification-text);
     font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* HEADER */
 
 .dashboard-header {
+    width: 100%;
     min-height: 76px;
     padding: 0 5%;
     display: flex;
@@ -37,8 +68,9 @@ body {
     justify-content: space-between;
     gap: 24px;
     border-bottom: 1px solid var(--notification-border);
-    background: rgba(9, 13, 25, 0.82);
+    background: rgba(9, 13, 25, 0.88);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     position: sticky;
     top: 0;
     z-index: 20;
@@ -58,6 +90,7 @@ body {
 .brand-icon {
     width: 35px;
     height: 35px;
+    flex-shrink: 0;
     display: grid;
     place-items: center;
     border-radius: 11px;
@@ -82,9 +115,12 @@ body {
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
+    transition: color 0.2s ease;
+    white-space: nowrap;
 }
 
-.top-navigation a:hover {
+.top-navigation a:hover,
+.top-navigation a.active {
     color: white;
 }
 
@@ -92,6 +128,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-shrink: 0;
 }
 
 .member-label {
@@ -101,6 +138,7 @@ body {
 
 .logout-button {
     padding: 9px 14px;
+    min-height: 38px;
     border: 1px solid var(--notification-border);
     border-radius: 9px;
     background: rgba(255, 255, 255, 0.04);
@@ -108,6 +146,7 @@ body {
     font: inherit;
     font-size: 12px;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 .logout-button:hover {
@@ -138,6 +177,7 @@ body {
     font-family: "Playfair Display", serif;
     font-size: clamp(32px, 5vw, 43px);
     letter-spacing: -1px;
+    line-height: 1.2;
 }
 
 .notifications-intro h1 span {
@@ -179,6 +219,7 @@ body {
 }
 
 .refresh-button {
+    min-height: 40px;
     padding: 10px 15px;
     border: 1px solid var(--notification-border);
     border-radius: 10px;
@@ -187,10 +228,12 @@ body {
     font: inherit;
     font-size: 12px;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .refresh-button:hover {
     border-color: var(--notification-purple);
+    background: rgba(155, 140, 255, 0.08);
 }
 
 /* NOTIFICATION SECTION */
@@ -200,12 +243,14 @@ body {
     border: 1px solid var(--notification-border);
     border-radius: 18px;
     background: var(--notification-card);
+    min-width: 0;
 }
 
 .notification-section-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 20px;
 }
@@ -216,6 +261,7 @@ body {
 }
 
 .mark-all-button {
+    min-height: 35px;
     padding: 7px 0;
     border: 0;
     background: transparent;
@@ -224,18 +270,22 @@ body {
     font-size: 11px;
     font-weight: 700;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .mark-all-button:hover {
     color: white;
 }
 
-/* NOTIFICATION ITEM */
+/* NOTIFICATION LIST */
 
 .notification-list {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
+
+/* NOTIFICATION ITEM */
 
 .notification-item {
     display: flex;
@@ -247,6 +297,7 @@ body {
     text-decoration: none;
     color: inherit;
     transition: background 0.2s ease;
+    min-width: 0;
 }
 
 .notification-item:last-child {
@@ -260,6 +311,8 @@ body {
 .notification-item.unread {
     background: rgba(155, 140, 255, 0.07);
 }
+
+/* AVATAR */
 
 .notification-avatar {
     width: 43px;
@@ -280,6 +333,8 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+/* NOTIFICATION CONTENT */
 
 .notification-content {
     flex: 1;
@@ -314,6 +369,8 @@ body {
     font-size: 10px;
 }
 
+/* UNREAD INDICATOR */
+
 .notification-status {
     width: 8px;
     height: 8px;
@@ -342,63 +399,193 @@ body {
     margin: 12px 0 0;
     color: var(--notification-cyan);
     font-size: 11px;
+    line-height: 1.6;
 }
+
+/* FOOTER */
 
 .notifications-footer {
     padding: 35px 0 10px;
     text-align: center;
     color: #69738d;
     font-size: 11px;
+    line-height: 1.7;
 }
 
-/* RESPONSIVE */
+/* TABLETS */
 
 @media (max-width: 850px) {
+
     .dashboard-header {
-        padding: 0 20px;
+        padding: 14px 22px;
         flex-wrap: wrap;
         gap: 12px;
-        min-height: 70px;
+        min-height: auto;
     }
 
     .top-navigation {
         order: 3;
         width: 100%;
         justify-content: center;
-        padding: 10px 0 13px;
+        padding: 12px 0 5px;
         border-top: 1px solid var(--notification-border);
+        gap: 35px;
     }
+
 }
 
-@media (max-width: 560px) {
+/* SMALL TABLETS AND LARGE PHONES */
+
+@media (max-width: 650px) {
+
     .dashboard-header {
-        padding: 12px;
+        padding: 13px 16px;
+        gap: 10px;
     }
 
     .brand {
         font-size: 16px;
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 33px;
+        height: 33px;
+        font-size: 19px;
+    }
+
+    .header-actions {
+        gap: 8px;
     }
 
     .member-label {
         display: none;
     }
 
+    .logout-button {
+        padding: 8px 11px;
+        min-height: 35px;
+        font-size: 11px;
+    }
+
     .top-navigation {
-        gap: 22px;
+        gap: 0;
+        justify-content: space-around;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .top-navigation::-webkit-scrollbar {
+        display: none;
     }
 
     .top-navigation a {
         font-size: 12px;
+        padding: 5px 9px;
+    }
+
+    .notifications-page {
+        width: calc(100% - 30px);
+        padding-top: 40px;
+    }
+
+    .notifications-intro {
+        margin-bottom: 25px;
+    }
+
+    .notifications-intro h1 {
+        font-size: clamp(30px, 7vw, 38px);
+    }
+
+    .notifications-intro p {
+        font-size: 13px;
+    }
+
+    .notification-summary {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+
+    .notification-section {
+        padding: 17px;
+    }
+
+}
+
+/* MOBILE PHONES */
+
+@media (max-width: 480px) {
+
+    .dashboard-header {
+        padding: 12px;
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+
+    .top-navigation {
+        padding-top: 10px;
+        gap: 5px;
+    }
+
+    .top-navigation a {
+        font-size: 11px;
+        padding: 6px 5px;
     }
 
     .notifications-page {
         width: calc(100% - 24px);
-        padding-top: 38px;
+        padding-top: 32px;
     }
 
-    .notification-summary,
+    .section-eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+    .notifications-intro h1 {
+        margin-top: 10px;
+        font-size: 32px;
+    }
+
+    .notification-summary {
+        padding: 16px;
+        gap: 10px;
+        border-radius: 14px;
+    }
+
+    .summary-label {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .notification-summary h2 {
+        font-size: 27px;
+    }
+
+    .refresh-button {
+        padding: 9px 11px;
+        min-height: 38px;
+        font-size: 11px;
+    }
+
     .notification-section {
-        padding: 17px;
+        padding: 14px 12px;
+        border-radius: 15px;
+    }
+
+    .notification-section-heading {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .notification-section-heading h2 {
+        font-size: 15px;
+    }
+
+    .mark-all-button {
+        font-size: 10px;
     }
 
     .notification-item {
@@ -410,9 +597,116 @@ body {
         width: 37px;
         height: 37px;
         flex-basis: 37px;
+        font-size: 13px;
     }
 
     .notification-title {
         font-size: 12px;
+        line-height: 1.65;
     }
+
+    .notification-description {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    .notification-time {
+        font-size: 9px;
+    }
+
+    .notification-status {
+        width: 7px;
+        height: 7px;
+        flex-basis: 7px;
+        margin-top: 7px;
+    }
+
+    .notification-empty {
+        padding: 32px 10px;
+        font-size: 12px;
+    }
+
+    .notifications-footer {
+        padding-top: 27px;
+    }
+
 }
+
+/* VERY SMALL PHONES */
+
+@media (max-width: 360px) {
+
+    .dashboard-header {
+        padding: 10px;
+    }
+
+    .brand {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    .brand-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 17px;
+    }
+
+    .logout-button {
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+
+    .top-navigation a {
+        font-size: 10px;
+    }
+
+    .notifications-page {
+        width: calc(100% - 20px);
+    }
+
+    .notification-summary {
+        padding: 13px;
+    }
+
+    .refresh-button {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    .notification-section {
+        padding: 12px 9px;
+    }
+
+    .notification-item {
+        gap: 8px;
+    }
+
+    .notification-avatar {
+        width: 33px;
+        height: 33px;
+        flex-basis: 33px;
+    }
+
+}
+
+/* ACCESSIBILITY */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--notification-cyan);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+```
