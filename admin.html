@@ -1,222 +1,210 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11172b">
+    <meta name="description" content="PrivateSpace administrator dashboard">
 
     <title>Admin Dashboard | PrivateSpace</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="../admin.css">
+    <link rel="stylesheet" href="./admin.css">
 </head>
 
 <body>
 
-    <div class="dashboard-layout">
+<div class="dashboard-layout">
 
-        <aside class="sidebar">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">P</div>
+            <div>
+                <h2>PrivateSpace</h2>
+                <span>Administration</span>
+            </div>
+        </div>
 
-            <div class="brand">
-                <div class="brand-icon">P</div>
+        <p class="sidebar-label">WORKSPACE</p>
+
+        <nav class="sidebar-nav">
+            <a href="./admin.html" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+            <a href="#membersSection" class="nav-link">
+                <span>♙</span> Members
+            </a>
+            <a href="#pendingSection" class="nav-link">
+                <span>◷</span> Pending Requests
+            </a>
+            <a href="./main.html" class="nav-link">
+                <span>⌂</span> Home
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="admin-profile">
+                <div class="admin-avatar" id="adminAvatar">A</div>
                 <div>
-                    <h2>PrivateSpace</h2>
-                    <span>Administration</span>
+                    <strong id="adminName">Administrator</strong>
+                    <small>Administrator</small>
                 </div>
             </div>
 
-            <div class="sidebar-label">WORKSPACE</div>
+            <button type="button" id="logoutButton" class="logout-button">
+                ↪ Sign out
+            </button>
+        </div>
+    </aside>
 
-            <nav class="sidebar-nav">
-                <a href="admin.html" class="nav-link active">
-                    <span>▦</span> Dashboard
-                </a>
+    <main class="main-content">
 
-                <a href="#membersSection" class="nav-link">
-                    <span>♙</span> Members
-                </a>
+        <header class="topbar">
+            <div>
+                <p class="topbar-label">PRIVATE COMMUNITY</p>
+                <h1>Admin Dashboard</h1>
+            </div>
 
-                <a href="#pendingSection" class="nav-link">
-                    <span>◷</span> Pending Requests
-                </a>
-            </nav>
+            <div class="admin-badge">
+                <span class="status-dot"></span>
+                ADMIN ACCESS
+            </div>
+        </header>
 
-            <div class="sidebar-bottom">
-                <div class="admin-profile">
-                    <div class="admin-avatar">A</div>
-                    <div>
-                        <strong id="adminName">Administrator</strong>
-                        <small>Administrator</small>
-                    </div>
+        <section id="dashboardLoading" class="message-panel">
+            <span class="loading-spinner"></span>
+            Checking administrator access...
+        </section>
+
+        <section id="dashboardError" class="message-panel error-panel" hidden>
+            <h3>Access unavailable</h3>
+            <p id="errorMessage">You cannot access this dashboard.</p>
+            <a href="./login.html">Return to login</a>
+        </section>
+
+        <div id="dashboardContent" hidden>
+
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">OVERVIEW</p>
+                    <h2>Welcome back, <span id="welcomeName">Admin</span></h2>
+                    <p>Manage your PrivateSpace community from here.</p>
                 </div>
 
-                <button id="logoutButton" class="logout-button">
-                    ↪ Sign out
+                <button type="button" id="refreshButton" class="refresh-button">
+                    ↻ Refresh data
                 </button>
-            </div>
-
-        </aside>
-
-
-        <main class="main-content">
-
-            <header class="topbar">
-                <div>
-                    <p class="topbar-label">PRIVATE COMMUNITY</p>
-                    <h1>Admin Dashboard</h1>
-                </div>
-
-                <div class="admin-badge">
-                    <span class="status-dot"></span>
-                    ADMIN ACCESS
-                </div>
-            </header>
-
-
-            <section id="dashboardLoading" class="message-panel">
-                Checking administrator access...
             </section>
 
-            <section id="dashboardError" class="message-panel error-panel" hidden>
-                <h3>Access unavailable</h3>
-                <p id="errorMessage">
-                    You cannot access this dashboard.
-                </p>
-                <a href="../login.html">Return to login</a>
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">♙</div>
+                    <p>Total Members</p>
+                    <h2 id="totalMembers">0</h2>
+                    <small>Registered member accounts</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <p>Pending Requests</p>
+                    <h2 id="pendingMembers">0</h2>
+                    <small>Waiting for your approval</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Approved Members</p>
+                    <h2 id="approvedMembers">0</h2>
+                    <small>Authorized members</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon red">×</div>
+                    <p>Rejected Members</p>
+                    <h2 id="rejectedMembers">0</h2>
+                    <small>Registration not approved</small>
+                </article>
+
             </section>
 
+            <section class="dashboard-section" id="pendingSection">
 
-            <div id="dashboardContent" hidden>
-
-                <section class="welcome-section">
+                <div class="section-heading">
                     <div>
-                        <p class="eyebrow">OVERVIEW</p>
-                        <h2>Welcome back, <span id="welcomeName">Admin</span></h2>
-                        <p>Manage your PrivateSpace community from here.</p>
+                        <p class="eyebrow">REVIEW</p>
+                        <h2>Pending Requests</h2>
+                        <p>Review new registrations before granting access.</p>
                     </div>
 
-                    <button id="refreshButton" class="refresh-button">
-                        ↻ Refresh data
-                    </button>
-                </section>
+                    <span class="count-label" id="pendingCountLabel">
+                        0 requests
+                    </span>
+                </div>
 
+                <div id="pendingList" class="member-list"></div>
 
-                <section class="stats-grid">
+                <div id="noPendingMessage" class="empty-state" hidden>
+                    <div class="empty-icon">✓</div>
+                    <h3>All caught up!</h3>
+                    <p>There are no pending registration requests.</p>
+                </div>
 
-                    <article class="stat-card">
-                        <div class="stat-icon purple">♙</div>
-                        <p>Total Members</p>
-                        <h2 id="totalMembers">0</h2>
-                        <small>Registered member accounts</small>
-                    </article>
+            </section>
 
-                    <article class="stat-card">
-                        <div class="stat-icon orange">◷</div>
-                        <p>Pending Requests</p>
-                        <h2 id="pendingMembers">0</h2>
-                        <small>Waiting for your approval</small>
-                    </article>
+            <section class="dashboard-section" id="membersSection">
 
-                    <article class="stat-card">
-                        <div class="stat-icon green">✓</div>
-                        <p>Approved Members</p>
-                        <h2 id="approvedMembers">0</h2>
-                        <small>Authorized members</small>
-                    </article>
-
-                    <article class="stat-card">
-                        <div class="stat-icon red">×</div>
-                        <p>Rejected Members</p>
-                        <h2 id="rejectedMembers">0</h2>
-                        <small>Registration not approved</small>
-                    </article>
-
-                </section>
-
-
-                <section class="dashboard-section" id="pendingSection">
-
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">REVIEW</p>
-                            <h2>Pending Requests</h2>
-                            <p>Review new registrations before granting access.</p>
-                        </div>
-
-                        <span class="count-label" id="pendingCountLabel">
-                            0 requests
-                        </span>
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">COMMUNITY</p>
+                        <h2>All Members</h2>
+                        <p>View and manage registered community members.</p>
                     </div>
+                </div>
 
-                    <div id="pendingList" class="member-list">
-                    </div>
+                <div class="member-toolbar">
+                    <input
+                        type="search"
+                        id="memberSearch"
+                        placeholder="Search members by name..."
+                        aria-label="Search members">
 
-                    <div id="noPendingMessage" class="empty-state" hidden>
-                        <div class="empty-icon">✓</div>
-                        <h3>All caught up!</h3>
-                        <p>There are no pending registration requests.</p>
-                    </div>
+                    <select id="statusFilter" aria-label="Filter members">
+                        <option value="all">All members</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
 
-                </section>
+                <div id="allMembersList" class="member-list"></div>
 
+                <div id="noMembersMessage" class="empty-state" hidden>
+                    <h3>No members found</h3>
+                    <p>Try another search or filter.</p>
+                </div>
 
-                <section class="dashboard-section" id="membersSection">
+            </section>
 
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">COMMUNITY</p>
-                            <h2>All Members</h2>
-                            <p>View and manage registered community members.</p>
-                        </div>
-                    </div>
+            <div id="dashboardMessage"
+                 class="dashboard-message"
+                 role="status"
+                 aria-live="polite"
+                 hidden></div>
 
-                    <div class="member-toolbar">
+            <footer class="dashboard-footer">
+                PrivateSpace Administration · Community management
+            </footer>
 
-                        <input
-                            type="search"
-                            id="memberSearch"
-                            placeholder="Search members by name..."
-                        >
+        </div>
+    </main>
+</div>
 
-                        <select id="statusFilter">
-                            <option value="all">All members</option>
-                            <option value="pending">Pending</option>
-                            <option value="approved">Approved</option>
-                            <option value="rejected">Rejected</option>
-                        </select>
-
-                    </div>
-
-                    <div id="allMembersList" class="member-list">
-                    </div>
-
-                    <div id="noMembersMessage" class="empty-state" hidden>
-                        <h3>No members found</h3>
-                        <p>Try another search or filter.</p>
-                    </div>
-
-                </section>
-
-
-                <div id="dashboardMessage" class="dashboard-message" hidden></div>
-
-                <footer class="dashboard-footer">
-                    PrivateSpace Administration · Secure community management
-                </footer>
-
-            </div>
-
-        </main>
-
-    </div>
-
-    <script type="module" src="../admin.js"></script>
+<script type="module" src="./admin.js"></script>
 
 </body>
 </html>
