@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,59 +6,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="Sign in or request access to the PrivateSpace community.">
+    <meta name="theme-color" content="#080b18">
+
     <title>PrivateSpace | Account Access</title>
 
+    <!-- Website fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet">
 
+    <!-- Login and signup design -->
     <link rel="stylesheet" href="./login.css">
 </head>
 
 <body>
 
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
+    <!-- Background lighting -->
+    <div class="background-glow glow-one" aria-hidden="true"></div>
+    <div class="background-glow glow-two" aria-hidden="true"></div>
 
     <main class="page-container">
 
+        <!-- ================= HEADER ================= -->
+
         <header class="top-header">
-            <a href="./index.html" class="brand">
+
+            <a href="./index.html" class="brand" aria-label="PrivateSpace home">
+
                 <span class="brand-icon">P</span>
-                <span>Private<span class="brand-light">Space</span></span>
+
+                <span>
+                    Private<span class="brand-light">Space</span>
+                </span>
+
             </a>
 
-            <span class="private-label">
+            <div class="private-label">
                 <span class="status-dot"></span>
                 PRIVATE COMMUNITY
-            </span>
+            </div>
+
         </header>
+
+
+        <!-- ================= ACCOUNT ACCESS ================= -->
 
         <section class="login-section">
 
             <div class="login-card">
 
-                <div class="card-decoration"></div>
+                <div class="card-decoration" aria-hidden="true"></div>
 
-                <div class="welcome-icon">
+                <!-- Welcome icon -->
+                <div class="welcome-icon" aria-hidden="true">
                     <span>✦</span>
                 </div>
 
-                <p class="eyebrow">A PLACE OF YOUR OWN</p>
+                <!-- Page heading -->
+                <p class="eyebrow">
+                    A PLACE OF YOUR OWN
+                </p>
 
-                <h1 id="pageTitle">Welcome <span>back.</span></h1>
+                <h1 id="pageTitle">
+                    Welcome <span>back.</span>
+                </h1>
 
                 <p class="subtitle" id="pageSubtitle">
                     Sign in to enter your private space.
                     Your conversations belong here.
                 </p>
 
-                <!-- SIGN IN FORM -->
+
+                <!-- ================= SIGN IN FORM ================= -->
+
                 <form id="loginForm">
 
                     <div class="form-group">
-                        <label for="email">Email address</label>
+
+                        <label for="email">
+                            Email address
+                        </label>
 
                         <input
                             type="email"
@@ -66,13 +97,22 @@
                             name="email"
                             placeholder="you@example.com"
                             autocomplete="email"
+                            autocapitalize="none"
+                            spellcheck="false"
                             required
                         >
+
                     </div>
 
+
                     <div class="form-group">
+
                         <div class="password-heading">
-                            <label for="password">Password</label>
+
+                            <label for="password">
+                                Password
+                            </label>
+
                         </div>
 
                         <input
@@ -83,22 +123,41 @@
                             autocomplete="current-password"
                             required
                         >
+
                     </div>
 
-                    <p id="loginMessage" class="login-message" role="status" aria-live="polite"></p>
+
+                    <!-- Login feedback -->
+                    <p
+                        id="loginMessage"
+                        class="login-message"
+                        role="status"
+                        aria-live="polite">
+                    </p>
+
 
                     <button type="submit" id="loginButton">
+
                         <span>Enter your space</span>
-                        <span class="button-arrow">→</span>
+
+                        <span class="button-arrow" aria-hidden="true">
+                            →
+                        </span>
+
                     </button>
 
                 </form>
 
-                <!-- CREATE ACCOUNT FORM -->
+
+                <!-- ================= CREATE ACCOUNT FORM ================= -->
+
                 <form id="signupForm" hidden>
 
                     <div class="form-group">
-                        <label for="signupName">Your name</label>
+
+                        <label for="signupName">
+                            Your name
+                        </label>
 
                         <input
                             type="text"
@@ -109,10 +168,15 @@
                             maxlength="60"
                             required
                         >
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="signupEmail">Email address</label>
+
+                        <label for="signupEmail">
+                            Email address
+                        </label>
 
                         <input
                             type="email"
@@ -120,12 +184,19 @@
                             name="email"
                             placeholder="you@example.com"
                             autocomplete="email"
+                            autocapitalize="none"
+                            spellcheck="false"
                             required
                         >
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="signupPassword">Create password</label>
+
+                        <label for="signupPassword">
+                            Create password
+                        </label>
 
                         <input
                             type="password"
@@ -136,53 +207,99 @@
                             minlength="8"
                             required
                         >
+
                     </div>
 
-                    <p id="signupMessage" class="login-message" role="status" aria-live="polite"></p>
+
+                    <!-- Signup feedback -->
+                    <p
+                        id="signupMessage"
+                        class="login-message"
+                        role="status"
+                        aria-live="polite">
+                    </p>
+
 
                     <button type="submit" id="signupButton">
+
                         <span>Request access</span>
-                        <span class="button-arrow">→</span>
+
+                        <span class="button-arrow" aria-hidden="true">
+                            →
+                        </span>
+
                     </button>
 
-                    <p class="signup-note">
+
+                    <!-- Approval information -->
+                    <div class="signup-note">
                         Creating an account does not give immediate access.
-                        An administrator must approve your request.
-                    </p>
+                        Your request must be reviewed and approved by an
+                        administrator before you can enter PrivateSpace.
+                    </div>
 
                 </form>
 
-                <!-- SWITCH BETWEEN FORMS -->
-                <div class="auth-switch">
-                    <span id="switchText">New to PrivateSpace?</span>
 
-                    <button type="button" id="switchAuthButton">
+                <!-- ================= FORM SWITCH ================= -->
+
+                <div class="auth-switch">
+
+                    <span id="switchText">
+                        New to PrivateSpace?
+                    </span>
+
+                    <button
+                        type="button"
+                        id="switchAuthButton">
                         Create an account
                     </button>
+
                 </div>
 
+
+                <!-- Card footer -->
                 <div class="card-footer">
+
                     <span class="footer-line"></span>
+
                     <span>INVITATION ONLY</span>
+
                     <span class="footer-line"></span>
+
                 </div>
 
             </div>
 
+
+            <!-- Bottom message -->
             <p class="bottom-note">
                 A quieter corner of the internet.
             </p>
 
         </section>
 
+
+        <!-- ================= FOOTER ================= -->
+
         <footer class="page-footer">
-            <span>© 2026 PrivateSpace</span>
-            <span>Built for meaningful connections.</span>
+
+            <span>
+                © 2026 PrivateSpace
+            </span>
+
+            <span>
+                Built for meaningful connections.
+            </span>
+
         </footer>
 
     </main>
 
+
+    <!-- Account functionality -->
     <script type="module" src="./login.js"></script>
 
 </body>
 </html>
+```
